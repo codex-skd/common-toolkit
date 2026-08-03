@@ -1,0 +1,5 @@
+{
+  "common_toolkit.cmd.serialize_success": "已将 %s 保存至 %s。",
+  "common_toolkit.cmd.serialize_failure": "序列化过程中发生错误。",
+  "common_toolkit.cmd.not_found": "未找到 %s。"
+}

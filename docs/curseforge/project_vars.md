@@ -2,16 +2,16 @@
 
 > Las siguientes variables son leídas automáticamente por `../codex-docs/scripts/curseforge-upload.ps1`
 
-project_id = TBD (pendiente de alta manual en CurseForge — no existe endpoint API para crear proyectos)
+project_id = 1638419
 api_token = ee776b0a-ee95-4850-b554-06be02a8657f
-game_versions = TBD (rellenar tras el alta, según el listado real de versiones/entornos de CurseForge para MC 26.2 + NeoForge)
+game_versions = 9638, 9639, 16498, 10150
 release_type = beta
 
 ## Proyecto
 
 | Variable | Valor |
 |----------|-------|
-| `curseforge_project_id` | pendiente — se asigna al crear el proyecto en https://www.curseforge.com/software/create |
+| `curseforge_project_id` | `1638419` |
 | `mod_id` | `common_toolkit` |
 | `display_name` | `Common Toolkit` (separado, no junto) |
 
@@ -21,7 +21,7 @@ release_type = beta
 |---|---|
 | Project Name | `Common Toolkit` |
 | Slug/URL | `common-toolkit` (verificar disponibilidad; si está ocupado, `common-toolkit-mod`) |
-| Summary (resumen corto) | `A NeoForge library mod providing shared developer utilities: config, networking, dynamic JSON registries, gear/mix systems.` |
+| Summary (resumen corto) | `A NeoForge library mod providing shared developer utilities: declarative config, networking helpers, dynamic JSON-driven registries with client sync, weighted gear/brewing-mix systems, and creative tab filling.` (214 caracteres) |
 | Category | Library / API |
 | License | All Rights Reserved (mod propio) — ver `NOTICE.md` en la raíz del repo para la atribución MIT/LGPL-2.1 del código heredado de Placebo |
 | Game | Minecraft |
@@ -94,9 +94,9 @@ Ejemplo (primera beta): `26.2-neoforge-beta.1`
 <p><strong>JAR</strong>: <code>common_toolkit-26.2-neoforge-0.0.0-beta.1.jar</code></p>
 ```
 
-## Flujo completo (una vez el proyecto exista en CurseForge)
+## Flujo completo
 
-1. Crear el proyecto manualmente con los datos de la tabla de arriba → anotar `curseforge_project_id` aquí.
+1. Proyecto ya creado (`project_id = 1638419`).
 2. `./gradlew clean build`
 3. Actualizar `docs/curseforge/versions/<version>.md` con HTML
 4. Actualizar `CHANGELOG.md`

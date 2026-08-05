@@ -1,16 +1,16 @@
-# Graph Report - 26.2  (2026-08-06)
+# Graph Report - 26.2  (2026-08-04)
 
 ## Corpus Check
-- 121 files · ~100,102 words
+- 120 files · ~100,001 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 1717 nodes · 3498 edges · 76 communities (67 shown, 9 thin omitted)
+- 1712 nodes · 3494 edges · 74 communities (64 shown, 10 thin omitted)
 - Extraction: 95% EXTRACTED · 5% INFERRED · 0% AMBIGUOUS · INFERRED: 173 edges (avg confidence: 0.8)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `a2719649`
+- Built from commit: `27f6804e`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -85,7 +85,6 @@
 - ResourceReloadEvent.java
 - CLAUDE.md — common_toolkit (26.2)
 - Common Toolkit — Registro de cambios
-- Type
 
 ## God Nodes (most connected - your core abstractions)
 1. `DynamicRegistry` - 88 edges
@@ -114,7 +113,7 @@
 ## Import Cycles
 - None detected.
 
-## Communities (76 total, 9 thin omitted)
+## Communities (74 total, 10 thin omitted)
 
 ### Community 0 - "Bi-Directional Map"
 Cohesion: 0.06
@@ -141,12 +140,12 @@ Cohesion: 0.06
 Nodes (28): DataGenerator, GatherDataEventGenerator, Overwrite, PackResources, PackType, FieldOrderingFactory, Impl, Identifier (+20 more)
 
 ### Community 6 - "Block Entities"
-Cohesion: 0.06
-Nodes (33): BlockEntity, BlockEntityType, EntityBlock, BlockPos, BlockState, Level, TickingBlockEntity, Block (+25 more)
+Cohesion: 0.10
+Nodes (23): BlockEntity, EntityBlock, BlockPos, BlockState, Level, TickingBlockEntity, BlockEntityTicker, BlockEntityType (+15 more)
 
 ### Community 7 - "Dynamic Registry Management"
-Cohesion: 0.18
-Nodes (4): Delegated, Internal, Override, RegistryCallback
+Cohesion: 0.17
+Nodes (7): DynamicRegistry, ByteBuf, StreamCodec, Delegated, Internal, Override, RegistryCallback
 
 ### Community 8 - "Codec Providers"
 Cohesion: 0.05
@@ -155,6 +154,10 @@ Nodes (36): CodecProvider, Codec, Codec, Nullable, Override, RegistryFriendlyByt
 ### Community 9 - "Payload Handlers"
 Cohesion: 0.07
 Nodes (30): HandlerThread, IPayloadHandler, RegisterPayloadHandlersEvent, ConnectionProtocol, IPayloadContext, Override, PacketFlow, SubscribeEvent (+22 more)
+
+### Community 10 - "Configuration Elements"
+Cohesion: 0.10
+Nodes (3): ConfigElement, Override, Pattern
 
 ### Community 12 - "Font Handling"
 Cohesion: 0.12
@@ -169,7 +172,7 @@ Cohesion: 0.05
 Nodes (10): ConfigGuiType, BOOLEAN, COLOR, CONFIG_CATEGORY, DOUBLE, INTEGER, MOD_ID, STRING (+2 more)
 
 ### Community 15 - "Dynamic Holder Management"
-Cohesion: 0.20
+Cohesion: 0.15
 Nodes (4): DynamicHolder, Identifier, Override, SuppressWarnings
 
 ### Community 16 - "Event Handling"
@@ -189,7 +192,7 @@ Cohesion: 0.11
 Nodes (23): ModifyConstant, RegistryOps, HandToJsonCommand, CommandSourceStack, DynamicCommandExceptionType, Gson, ItemStack, JsonElement (+15 more)
 
 ### Community 20 - "Configuration Categories"
-Cohesion: 0.09
+Cohesion: 0.06
 Nodes (4): ConfigCategory, CharMatcher, Entry, Override
 
 ### Community 21 - "Recipe Management"
@@ -197,15 +200,15 @@ Cohesion: 0.15
 Nodes (17): NonNullList, Recipe, RecipeOutput, RecipeProvider, Runner, ShapedRecipePattern, Holder, Identifier (+9 more)
 
 ### Community 22 - "Dynamic Tag Keys"
-Cohesion: 0.13
-Nodes (6): Direct, Either, Override, Named, DynamicTagKey, Override
+Cohesion: 0.07
+Nodes (16): Direct, DynamicHolderSet, Codec, Either, Override, RandomSource, RegistryFriendlyByteBuf, StreamCodec (+8 more)
 
 ### Community 23 - "Entity Types"
 Cohesion: 0.10
-Nodes (19): AttachmentType, EntityFactory, EntityType, Feature, Fluid, IAttachmentHolder, MobCategory, NewRegistryEvent (+11 more)
+Nodes (20): AttachmentType, EntityFactory, EntityType, Feature, Fluid, IAttachmentHolder, MobCategory, NewRegistryEvent (+12 more)
 
 ### Community 24 - "Data Provider Management"
-Cohesion: 0.14
+Cohesion: 0.13
 Nodes (10): DynamicTagProvider, CachedOutput, Identifier, Override, PackOutput, PathProvider, Provider, TagEntry (+2 more)
 
 ### Community 25 - "Server Events"
@@ -217,20 +220,16 @@ Cohesion: 0.12
 Nodes (19): Int2IntFunction, PoseStack, AnchorPoint, BOTTOM_CENTER, BOTTOM_LEFT, BOTTOM_RIGHT, MIDDLE_CENTER, MIDDLE_LEFT (+11 more)
 
 ### Community 27 - "Tag Lookup"
-Cohesion: 0.21
-Nodes (12): Lookup, SequencedSet, EntryWithSource, ConditionalOps, Identifier, JsonElement, Logger, Override (+4 more)
+Cohesion: 0.12
+Nodes (19): Lookup, SequencedSet, Identifier, ScannedTags, EntryWithSource, ConditionalOps, Identifier, JsonElement (+11 more)
 
 ### Community 28 - "Client Reload Listeners"
 Cohesion: 0.12
 Nodes (13): AddClientReloadListenersEvent, FMLClientSetupEvent, ItemTooltipEvent, MouseScrollingEvent, Pre, CommonToolkitClient, EventBusSubscriber, ItemStack (+5 more)
 
 ### Community 29 - "Registry Conditions"
-Cohesion: 0.08
-Nodes (27): DataProvider, ICondition, RegistryBootstrap, RegistrySetBuilder, DataGenBuilder, DataProviderFactory, Factory, FunctionalInterface (+19 more)
-
-### Community 30 - "Data Generator Populator"
-Cohesion: 0.14
-Nodes (6): DynamicHolderSet, Codec, RandomSource, RegistryFriendlyByteBuf, StreamCodec, SuppressWarnings
+Cohesion: 0.10
+Nodes (22): DataProvider, ICondition, RegistryBootstrap, RegistrySetBuilder, DataGenBuilder, DataProviderFactory, Factory, FunctionalInterface (+14 more)
 
 ### Community 31 - "Common Toolkit Setup"
 Cohesion: 0.16
@@ -249,12 +248,12 @@ Cohesion: 0.21
 Nodes (11): ITabFiller, BuildCreativeModeTabContentsEvent, CreativeModeTab, ItemLike, BuildCreativeModeTabContentsEvent, CreativeModeTab, Internal, ItemLike (+3 more)
 
 ### Community 35 - "Deferred Helper"
-Cohesion: 0.18
-Nodes (9): DataMapType, Experimental, RegistryBuilder, Codec, Holder, Registry, ResourceKey, SuppressWarnings (+1 more)
+Cohesion: 0.22
+Nodes (9): DataMapType, Experimental, DeferredHelper, Codec, Holder, Registry, ResourceKey, SuppressWarnings (+1 more)
 
 ### Community 36 - "Deferred Holders"
-Cohesion: 0.22
-Nodes (6): DeferredHolder, RangedAttribute, DeferredHelper, Attribute, MobEffectInstance, Potion
+Cohesion: 0.20
+Nodes (5): DeferredHolder, RangedAttribute, Attribute, MobEffectInstance, Potion
 
 ### Community 37 - "Data Component Types"
 Cohesion: 0.15
@@ -265,16 +264,16 @@ Cohesion: 0.27
 Nodes (6): ServerAboutToStartEvent, Mix, Override, PotionBrewing, SuppressWarnings, MixRegistry
 
 ### Community 40 - "Block Entity Types"
-Cohesion: 0.40
-Nodes (5): Override, ProfilerFiller, ResourceManager, RunnableReloader, Unit
+Cohesion: 0.19
+Nodes (10): BlockEntityType, Block, BlockEntitySupplier, BlockEntityTicker, Nullable, TickingBlockEntityType, TickSide, CLIENT (+2 more)
 
 ### Community 41 - "Server Player Management"
 Cohesion: 0.20
 Nodes (8): ServerPlayer, CommonToolkitUtil, BlockPos, Component, Deprecated, ItemStack, SafeVarargs, SuppressWarnings
 
 ### Community 42 - "Reload Listener"
-Cohesion: 0.24
-Nodes (10): SimplePreparableReloadListener, DynamicTagManager, ConditionalOps, Identifier, JsonElement, Override, ProfilerFiller, ResourceManager (+2 more)
+Cohesion: 0.15
+Nodes (12): CodecException, SimplePreparableReloadListener, AddServerReloadListenersEvent, BiMap, Logger, DynamicTagManager, ConditionalOps, Identifier (+4 more)
 
 ### Community 43 - "Json Mix Operations"
 Cohesion: 0.32
@@ -293,28 +292,28 @@ Cohesion: 0.27
 Nodes (7): CommandDispatcher, CommonToolkitCommand, CommandBuildContext, CommandSourceStack, GetDimensionTypeCommand, CommandSourceStack, LiteralArgumentBuilder
 
 ### Community 47 - "Config Element Validation"
-Cohesion: 0.12
-Nodes (10): Pattern, Pattern, tryParse(), Type, BOOLEAN, COLOR, DOUBLE, INTEGER (+2 more)
+Cohesion: 0.17
+Nodes (8): tryParse(), Type, BOOLEAN, COLOR, DOUBLE, INTEGER, MOD_ID, STRING
 
 ### Community 48 - "Runnable Reloader"
 Cohesion: 0.19
 Nodes (12): AbstractContainerScreen, MenuAccess, AbstractContainerScreenMixin, Mixin, CommonToolkitContainerScreen, Component, Inventory, DrawsOnLeft (+4 more)
 
 ### Community 50 - "DataGenPopulator"
-Cohesion: 0.13
-Nodes (8): MustBeInvokedByOverriders, DataGenPopulator, Internal, ReloadType, DEDICATED_CLIENT, INTEGRATED_CLIENT, SERVER, Identifier
+Cohesion: 0.16
+Nodes (7): MustBeInvokedByOverriders, DataGenPopulator, Internal, ReloadType, DEDICATED_CLIENT, INTEGRATED_CLIENT, SERVER
 
 ### Community 51 - "Json Utility"
-Cohesion: 0.36
-Nodes (4): ByteBuf, Codec, Identifier, StreamCodec
+Cohesion: 0.50
+Nodes (5): ConditionalOps, Identifier, JsonElement, Logger, JsonUtil
 
 ### Community 52 - "Gradient Color"
 Cohesion: 0.33
 Nodes (3): GradientColor, Override, TextColor
 
 ### Community 53 - "Config Flags"
-Cohesion: 0.29
-Nodes (5): ConfigFlags, Loadability, LOCKED, RELOADABLE, RESTARTABLE
+Cohesion: 0.17
+Nodes (10): ConfigFlags, Loadability, LOCKED, RELOADABLE, RESTARTABLE, Type, CLIENT, COMMON (+2 more)
 
 ### Community 55 - "Hash Cache Mixin"
 Cohesion: 0.53
@@ -325,8 +324,8 @@ Cohesion: 0.40
 Nodes (3): IContainerFactory, MenuSupplier, MenuType
 
 ### Community 58 - "Sync Types"
-Cohesion: 0.11
-Nodes (14): CodecException, DynamicRegistry, AddServerReloadListenersEvent, BiMap, ByteBuf, Codec, Identifier, JsonElement (+6 more)
+Cohesion: 0.20
+Nodes (6): Identifier, JsonElement, Nullable, Override, ProfilerFiller, ResourceManager
 
 ### Community 59 - "Custom Stats"
 Cohesion: 0.50
@@ -356,33 +355,25 @@ Nodes (3): LogicalSide, ResourceManager, ResourceReloadEvent
 Cohesion: 0.50
 Nodes (3): CLAUDE.md — common_toolkit (26.2), Prioridad de instrucciones, Workflow del mod
 
-### Community 71 - "Common Toolkit — Registro de cambios"
-Cohesion: 0.29
-Nodes (6): 0.0.0-beta.1, 0.0.0-beta.1, [0.0.0-beta.2] - 2026-08-05, Change, Common Toolkit — Registro de cambios, [mmon Toolkit — Registro de cambios
-
-### Community 74 - "Type"
-Cohesion: 0.40
-Nodes (5): Type, CLIENT, COMMON, SERVER, SYNCED
-
 ## Knowledge Gaps
-- **75 isolated node(s):** `CLIENT`, `SERVER`, `CLIENT_AND_SERVER`, `ConfigFlags`, `COMMON` (+70 more)
+- **72 isolated node(s):** `CLIENT`, `SERVER`, `CLIENT_AND_SERVER`, `ConfigFlags`, `COMMON` (+67 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **9 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **10 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `Configuration` connect `Configuration Loading` to `Pose Stack Operations`, `Property Management`, `Configuration Categories`, `ResourceReloadEvent.java`?**
   _High betweenness centrality (0.157) - this node is a cross-community bridge._
-- **Why does `DynamicRegistry` connect `Sync Types` to `Custom Packet Payloads`, `Dynamic Registry Management`, `Codec Providers`, `Server Start Events`, `Reload Listener`, `Dynamic Holder Management`, `DataGenPopulator`, `Json Utility`, `Dynamic Tag Keys`, `Data Provider Management`, `Tag Lookup`, `Registry Conditions`, `Data Generator Populator`?**
+- **Why does `DynamicRegistry` connect `Dynamic Registry Management` to `Custom Packet Payloads`, `Server Start Events`, `Codec Providers`, `Reload Listener`, `Dynamic Holder Management`, `DataGenPopulator`, `Dynamic Tag Keys`, `Data Provider Management`, `Sync Types`, `Tag Lookup`, `Registry Conditions`, `Data Generator Populator`?**
   _High betweenness centrality (0.153) - this node is a cross-community bridge._
 - **Why does `ConfigCategory` connect `Configuration Categories` to `Configuration Elements`, `Property Management`, `Configuration Loading`, `Config Element Validation`?**
   _High betweenness centrality (0.098) - this node is a cross-community bridge._
 - **What connects `CLIENT`, `SERVER`, `CLIENT_AND_SERVER` to the rest of the system?**
-  _75 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _72 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Bi-Directional Map` be split into smaller, more focused modules?**
   _Cohesion score 0.05647517039922103 - nodes in this community are weakly interconnected._
 - **Should `Container Menu` be split into smaller, more focused modules?**
   _Cohesion score 0.06001984126984127 - nodes in this community are weakly interconnected._
 - **Should `Codec Operations` be split into smaller, more focused modules?**
-  _Cohesion score 0.09142857142857143 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.08597285067873303 - nodes in this community are weakly interconnected._

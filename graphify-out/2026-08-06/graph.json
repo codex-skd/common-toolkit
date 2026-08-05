@@ -596,7 +596,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_main_java_com_skd_commontoolkit_block_entity_tickingblockentitytype",
-      "community": 6,
+      "community": 40,
       "norm_label": "tickingblockentitytype.java"
     },
     {
@@ -606,7 +606,7 @@
       "source_location": "L18",
       "_origin": "ast",
       "id": "src_main_java_com_skd_commontoolkit_block_entity_tickingblockentitytype_tickingblockentitytype",
-      "community": 6,
+      "community": 40,
       "norm_label": "tickingblockentitytype"
     },
     {
@@ -616,7 +616,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "blockentitytype",
-      "community": 6,
+      "community": 40,
       "norm_label": "blockentitytype"
     },
     {
@@ -626,7 +626,7 @@
       "source_location": "L22",
       "_origin": "ast",
       "id": "src_main_java_com_skd_commontoolkit_block_entity_tickingblockentitytype_tickingblockentitytype_tickingblockentitytype",
-      "community": 6,
+      "community": 40,
       "norm_label": ".tickingblockentitytype()"
     },
     {
@@ -636,7 +636,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "src_main_java_com_skd_commontoolkit_block_entity_tickingblockentitytype_java_blockentitysupplier",
-      "community": 6,
+      "community": 40,
       "norm_label": "blockentitysupplier"
     },
     {
@@ -646,7 +646,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "src_main_java_com_skd_commontoolkit_block_entity_tickingblockentitytype_java_block",
-      "community": 6,
+      "community": 40,
       "norm_label": "block"
     },
     {
@@ -656,7 +656,7 @@
       "source_location": "L32",
       "_origin": "ast",
       "id": "src_main_java_com_skd_commontoolkit_block_entity_tickingblockentitytype_tickingblockentitytype_getticker",
-      "community": 6,
+      "community": 40,
       "norm_label": ".getticker()"
     },
     {
@@ -666,7 +666,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "src_main_java_com_skd_commontoolkit_block_entity_tickingblockentitytype_java_blockentityticker",
-      "community": 6,
+      "community": 40,
       "norm_label": "blockentityticker"
     },
     {
@@ -676,7 +676,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "src_main_java_com_skd_commontoolkit_block_entity_tickingblockentitytype_java_nullable",
-      "community": 6,
+      "community": 40,
       "norm_label": "nullable"
     },
     {
@@ -686,7 +686,7 @@
       "source_location": "L43",
       "_origin": "ast",
       "id": "src_main_java_com_skd_commontoolkit_block_entity_tickingblockentitytype_tickside",
-      "community": 6,
+      "community": 40,
       "norm_label": "tickside"
     },
     {
@@ -696,7 +696,7 @@
       "source_location": "L44",
       "_origin": "ast",
       "id": "src_main_java_com_skd_commontoolkit_block_entity_tickingblockentitytype_tickside_client",
-      "community": 6,
+      "community": 40,
       "norm_label": "client"
     },
     {
@@ -706,7 +706,7 @@
       "source_location": "L45",
       "_origin": "ast",
       "id": "src_main_java_com_skd_commontoolkit_block_entity_tickingblockentitytype_tickside_server",
-      "community": 6,
+      "community": 40,
       "norm_label": "server"
     },
     {
@@ -716,7 +716,7 @@
       "source_location": "L46",
       "_origin": "ast",
       "id": "src_main_java_com_skd_commontoolkit_block_entity_tickingblockentitytype_tickside_client_and_server",
-      "community": 6,
+      "community": 40,
       "norm_label": "client_and_server"
     },
     {
@@ -726,7 +726,7 @@
       "source_location": "L51",
       "_origin": "ast",
       "id": "src_main_java_com_skd_commontoolkit_block_entity_tickingblockentitytype_ticksonclient",
-      "community": 6,
+      "community": 40,
       "norm_label": "ticksonclient()"
     },
     {
@@ -736,7 +736,7 @@
       "source_location": "L58",
       "_origin": "ast",
       "id": "src_main_java_com_skd_commontoolkit_block_entity_tickingblockentitytype_ticksonserver",
-      "community": 6,
+      "community": 40,
       "norm_label": "ticksonserver()"
     },
     {
@@ -1816,7 +1816,7 @@
       "source_location": "L76",
       "_origin": "ast",
       "id": "src_main_java_com_skd_commontoolkit_config_configcategory_configcategory_getname",
-      "community": 10,
+      "community": 20,
       "norm_label": ".getname()"
     },
     {
@@ -1856,7 +1856,7 @@
       "source_location": "L96",
       "_origin": "ast",
       "id": "src_main_java_com_skd_commontoolkit_config_configcategory_configcategory_getvalues",
-      "community": 13,
+      "community": 20,
       "norm_label": ".getvalues()"
     },
     {
@@ -1866,7 +1866,7 @@
       "source_location": "L100",
       "_origin": "ast",
       "id": "src_main_java_com_skd_commontoolkit_config_configcategory_configcategory_getorderedvalues",
-      "community": 10,
+      "community": 20,
       "norm_label": ".getorderedvalues()"
     },
     {
@@ -1906,7 +1906,7 @@
       "source_location": "L125",
       "_origin": "ast",
       "id": "src_main_java_com_skd_commontoolkit_config_configcategory_configcategory_getcomment",
-      "community": 10,
+      "community": 20,
       "norm_label": ".getcomment()"
     },
     {
@@ -1946,7 +1946,7 @@
       "source_location": "L160",
       "_origin": "ast",
       "id": "src_main_java_com_skd_commontoolkit_config_configcategory_configcategory_showingui",
-      "community": 10,
+      "community": 20,
       "norm_label": ".showingui()"
     },
     {
@@ -2006,7 +2006,7 @@
       "source_location": "L199",
       "_origin": "ast",
       "id": "src_main_java_com_skd_commontoolkit_config_configcategory_configcategory_get",
-      "community": 13,
+      "community": 20,
       "norm_label": ".get()"
     },
     {
@@ -2016,7 +2016,7 @@
       "source_location": "L203",
       "_origin": "ast",
       "id": "src_main_java_com_skd_commontoolkit_config_configcategory_configcategory_write",
-      "community": 10,
+      "community": 20,
       "norm_label": ".write()"
     },
     {
@@ -2026,7 +2026,7 @@
       "source_location": "L293",
       "_origin": "ast",
       "id": "src_main_java_com_skd_commontoolkit_config_configcategory_configcategory_getindent",
-      "community": 10,
+      "community": 20,
       "norm_label": ".getindent()"
     },
     {
@@ -2186,7 +2186,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_main_java_com_skd_commontoolkit_config_configelement",
-      "community": 47,
+      "community": 10,
       "norm_label": "configelement.java"
     },
     {
@@ -2316,7 +2316,7 @@
       "source_location": "L121",
       "_origin": "ast",
       "id": "src_main_java_com_skd_commontoolkit_config_configelement_configelement_getcomment",
-      "community": 10,
+      "community": 20,
       "norm_label": ".getcomment()"
     },
     {
@@ -2416,7 +2416,7 @@
       "source_location": "L171",
       "_origin": "ast",
       "id": "src_main_java_com_skd_commontoolkit_config_configelement_configelement_getdefaults",
-      "community": 11,
+      "community": 10,
       "norm_label": ".getdefaults()"
     },
     {
@@ -2426,7 +2426,7 @@
       "source_location": "L198",
       "_origin": "ast",
       "id": "src_main_java_com_skd_commontoolkit_config_configelement_configelement_getvalidationpattern",
-      "community": 47,
+      "community": 10,
       "norm_label": ".getvalidationpattern()"
     },
     {
@@ -2436,7 +2436,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "src_main_java_com_skd_commontoolkit_config_configelement_java_pattern",
-      "community": 47,
+      "community": 10,
       "norm_label": "pattern"
     },
     {
@@ -2456,7 +2456,7 @@
       "source_location": "L208",
       "_origin": "ast",
       "id": "src_main_java_com_skd_commontoolkit_config_configelement_configelement_get",
-      "community": 11,
+      "community": 10,
       "norm_label": ".get()"
     },
     {
@@ -2466,7 +2466,7 @@
       "source_location": "L213",
       "_origin": "ast",
       "id": "src_main_java_com_skd_commontoolkit_config_configelement_configelement_getlist",
-      "community": 11,
+      "community": 10,
       "norm_label": ".getlist()"
     },
     {
@@ -2526,7 +2526,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "src_main_java_com_skd_commontoolkit_config_configflags_type",
-      "community": 74,
+      "community": 53,
       "norm_label": "type"
     },
     {
@@ -2536,7 +2536,7 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "src_main_java_com_skd_commontoolkit_config_configflags_type_common",
-      "community": 74,
+      "community": 53,
       "norm_label": "common"
     },
     {
@@ -2546,7 +2546,7 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "src_main_java_com_skd_commontoolkit_config_configflags_type_synced",
-      "community": 74,
+      "community": 53,
       "norm_label": "synced"
     },
     {
@@ -2556,7 +2556,7 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "src_main_java_com_skd_commontoolkit_config_configflags_type_server",
-      "community": 74,
+      "community": 53,
       "norm_label": "server"
     },
     {
@@ -2566,7 +2566,7 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "src_main_java_com_skd_commontoolkit_config_configflags_type_client",
-      "community": 74,
+      "community": 53,
       "norm_label": "client"
     },
     {
@@ -3436,7 +3436,7 @@
       "source_location": "L27",
       "_origin": "ast",
       "id": "src_main_java_com_skd_commontoolkit_config_property_property_getcomment",
-      "community": 10,
+      "community": 20,
       "norm_label": ".getcomment()"
     },
     {
@@ -3546,7 +3546,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "src_main_java_com_skd_commontoolkit_config_property_java_pattern",
-      "community": 47,
+      "community": 11,
       "norm_label": "pattern"
     },
     {
@@ -3556,7 +3556,7 @@
       "source_location": "L80",
       "_origin": "ast",
       "id": "src_main_java_com_skd_commontoolkit_config_property_property_property",
-      "community": 11,
+      "community": 47,
       "norm_label": ".property()"
     },
     {
@@ -3576,7 +3576,7 @@
       "source_location": "L217",
       "_origin": "ast",
       "id": "src_main_java_com_skd_commontoolkit_config_property_property_settodefault",
-      "community": 10,
+      "community": 11,
       "norm_label": ".settodefault()"
     },
     {
@@ -3586,7 +3586,7 @@
       "source_location": "L228",
       "_origin": "ast",
       "id": "src_main_java_com_skd_commontoolkit_config_property_property_getdefault",
-      "community": 10,
+      "community": 11,
       "norm_label": ".getdefault()"
     },
     {
@@ -3636,7 +3636,7 @@
       "source_location": "L274",
       "_origin": "ast",
       "id": "src_main_java_com_skd_commontoolkit_config_property_property_showingui",
-      "community": 10,
+      "community": 11,
       "norm_label": ".showingui()"
     },
     {
@@ -3676,7 +3676,7 @@
       "source_location": "L315",
       "_origin": "ast",
       "id": "src_main_java_com_skd_commontoolkit_config_property_property_getmaxlistlength",
-      "community": 10,
+      "community": 11,
       "norm_label": ".getmaxlistlength()"
     },
     {
@@ -3696,7 +3696,7 @@
       "source_location": "L331",
       "_origin": "ast",
       "id": "src_main_java_com_skd_commontoolkit_config_property_property_islistlengthfixed",
-      "community": 10,
+      "community": 11,
       "norm_label": ".islistlengthfixed()"
     },
     {
@@ -3706,7 +3706,7 @@
       "source_location": "L340",
       "_origin": "ast",
       "id": "src_main_java_com_skd_commontoolkit_config_property_property_setvalidationpattern",
-      "community": 47,
+      "community": 11,
       "norm_label": ".setvalidationpattern()"
     },
     {
@@ -3716,7 +3716,7 @@
       "source_location": "L350",
       "_origin": "ast",
       "id": "src_main_java_com_skd_commontoolkit_config_property_property_getvalidationpattern",
-      "community": 47,
+      "community": 11,
       "norm_label": ".getvalidationpattern()"
     },
     {
@@ -3736,7 +3736,7 @@
       "source_location": "L370",
       "_origin": "ast",
       "id": "src_main_java_com_skd_commontoolkit_config_property_property_getlanguagekey",
-      "community": 10,
+      "community": 11,
       "norm_label": ".getlanguagekey()"
     },
     {
@@ -3786,7 +3786,7 @@
       "source_location": "L515",
       "_origin": "ast",
       "id": "src_main_java_com_skd_commontoolkit_config_property_property_getminvalue",
-      "community": 10,
+      "community": 11,
       "norm_label": ".getminvalue()"
     },
     {
@@ -3796,7 +3796,7 @@
       "source_location": "L524",
       "_origin": "ast",
       "id": "src_main_java_com_skd_commontoolkit_config_property_property_getmaxvalue",
-      "community": 10,
+      "community": 11,
       "norm_label": ".getmaxvalue()"
     },
     {
@@ -3826,7 +3826,7 @@
       "source_location": "L553",
       "_origin": "ast",
       "id": "src_main_java_com_skd_commontoolkit_config_property_property_getvalidvalues",
-      "community": 10,
+      "community": 11,
       "norm_label": ".getvalidvalues()"
     },
     {
@@ -3996,7 +3996,7 @@
       "source_location": "L871",
       "_origin": "ast",
       "id": "src_main_java_com_skd_commontoolkit_config_property_property_setname",
-      "community": 11,
+      "community": 47,
       "norm_label": ".setname()"
     },
     {
@@ -4026,7 +4026,7 @@
       "source_location": "L900",
       "_origin": "ast",
       "id": "src_main_java_com_skd_commontoolkit_config_property_property_islist",
-      "community": 11,
+      "community": 20,
       "norm_label": ".islist()"
     },
     {
@@ -4046,7 +4046,7 @@
       "source_location": "L913",
       "_origin": "ast",
       "id": "src_main_java_com_skd_commontoolkit_config_property_property_resetchangedstate",
-      "community": 10,
+      "community": 20,
       "norm_label": ".resetchangedstate()"
     },
     {
@@ -5516,7 +5516,7 @@
       "source_location": "L97",
       "_origin": "ast",
       "id": "src_main_java_com_skd_commontoolkit_dynreg_dynamicholder_dynamicholder_is",
-      "community": 22,
+      "community": 15,
       "norm_label": ".is()"
     },
     {
@@ -5586,7 +5586,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_main_java_com_skd_commontoolkit_dynreg_dynamicregistry",
-      "community": 58,
+      "community": 42,
       "norm_label": "dynamicregistry.java"
     },
     {
@@ -5596,7 +5596,7 @@
       "source_location": "L64",
       "_origin": "ast",
       "id": "src_main_java_com_skd_commontoolkit_dynreg_dynamicregistry_dynamicregistry",
-      "community": 58,
+      "community": 7,
       "norm_label": "dynamicregistry"
     },
     {
@@ -5636,7 +5636,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "src_main_java_com_skd_commontoolkit_dynreg_dynamicregistry_java_logger",
-      "community": 58,
+      "community": 42,
       "norm_label": "logger"
     },
     {
@@ -5646,7 +5646,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "src_main_java_com_skd_commontoolkit_dynreg_dynamicregistry_java_codec",
-      "community": 58,
+      "community": 30,
       "norm_label": "codec"
     },
     {
@@ -5656,7 +5656,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "src_main_java_com_skd_commontoolkit_dynreg_dynamicregistry_java_streamcodec",
-      "community": 58,
+      "community": 7,
       "norm_label": "streamcodec"
     },
     {
@@ -5666,7 +5666,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "src_main_java_com_skd_commontoolkit_dynreg_dynamicregistry_java_bytebuf",
-      "community": 58,
+      "community": 7,
       "norm_label": "bytebuf"
     },
     {
@@ -5676,7 +5676,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "src_main_java_com_skd_commontoolkit_dynreg_dynamicregistry_java_bimap",
-      "community": 58,
+      "community": 42,
       "norm_label": "bimap"
     },
     {
@@ -5686,7 +5686,7 @@
       "source_location": "L132",
       "_origin": "ast",
       "id": "src_main_java_com_skd_commontoolkit_dynreg_dynamicregistry_dynamicregistry_dynamicregistry",
-      "community": 58,
+      "community": 42,
       "norm_label": ".dynamicregistry()"
     },
     {
@@ -5786,7 +5786,7 @@
       "source_location": "L239",
       "_origin": "ast",
       "id": "src_main_java_com_skd_commontoolkit_dynreg_dynamicregistry_dynamicregistry_getvalues",
-      "community": 58,
+      "community": 7,
       "norm_label": ".getvalues()"
     },
     {
@@ -5796,7 +5796,7 @@
       "source_location": "L246",
       "_origin": "ast",
       "id": "src_main_java_com_skd_commontoolkit_dynreg_dynamicregistry_dynamicregistry_getvalue",
-      "community": 58,
+      "community": 24,
       "norm_label": ".getvalue()"
     },
     {
@@ -5836,7 +5836,7 @@
       "source_location": "L270",
       "_origin": "ast",
       "id": "src_main_java_com_skd_commontoolkit_dynreg_dynamicregistry_dynamicregistry_registertobus",
-      "community": 58,
+      "community": 7,
       "norm_label": ".registertobus()"
     },
     {
@@ -5846,7 +5846,7 @@
       "source_location": "L283",
       "_origin": "ast",
       "id": "src_main_java_com_skd_commontoolkit_dynreg_dynamicregistry_dynamicregistry_holder",
-      "community": 58,
+      "community": 15,
       "norm_label": ".holder()"
     },
     {
@@ -5856,7 +5856,7 @@
       "source_location": "L307",
       "_origin": "ast",
       "id": "src_main_java_com_skd_commontoolkit_dynreg_dynamicregistry_dynamicregistry_emptyholder",
-      "community": 58,
+      "community": 15,
       "norm_label": ".emptyholder()"
     },
     {
@@ -5866,7 +5866,7 @@
       "source_location": "L317",
       "_origin": "ast",
       "id": "src_main_java_com_skd_commontoolkit_dynreg_dynamicregistry_dynamicregistry_holdercodec",
-      "community": 58,
+      "community": 30,
       "norm_label": ".holdercodec()"
     },
     {
@@ -5876,7 +5876,7 @@
       "source_location": "L328",
       "_origin": "ast",
       "id": "src_main_java_com_skd_commontoolkit_dynreg_dynamicregistry_dynamicregistry_holderstreamcodec",
-      "community": 58,
+      "community": 7,
       "norm_label": ".holderstreamcodec()"
     },
     {
@@ -5906,7 +5906,7 @@
       "source_location": "L353",
       "_origin": "ast",
       "id": "src_main_java_com_skd_commontoolkit_dynreg_dynamicregistry_dynamicregistry_getid",
-      "community": 30,
+      "community": 22,
       "norm_label": ".getid()"
     },
     {
@@ -5916,7 +5916,7 @@
       "source_location": "L360",
       "_origin": "ast",
       "id": "src_main_java_com_skd_commontoolkit_dynreg_dynamicregistry_dynamicregistry_getlogger",
-      "community": 58,
+      "community": 42,
       "norm_label": ".getlogger()"
     },
     {
@@ -5926,7 +5926,7 @@
       "source_location": "L367",
       "_origin": "ast",
       "id": "src_main_java_com_skd_commontoolkit_dynreg_dynamicregistry_dynamicregistry_elementcodec",
-      "community": 58,
+      "community": 30,
       "norm_label": ".elementcodec()"
     },
     {
@@ -5976,7 +5976,7 @@
       "source_location": "L415",
       "_origin": "ast",
       "id": "src_main_java_com_skd_commontoolkit_dynreg_dynamicregistry_dynamicregistry_validateexistingholders",
-      "community": 58,
+      "community": 15,
       "norm_label": ".validateexistingholders()"
     },
     {
@@ -6006,7 +6006,7 @@
       "source_location": "L460",
       "_origin": "ast",
       "id": "src_main_java_com_skd_commontoolkit_dynreg_dynamicregistry_dynamicregistry_addreloader",
-      "community": 58,
+      "community": 42,
       "norm_label": ".addreloader()"
     },
     {
@@ -6016,7 +6016,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "src_main_java_com_skd_commontoolkit_dynreg_dynamicregistry_java_addserverreloadlistenersevent",
-      "community": 58,
+      "community": 42,
       "norm_label": "addserverreloadlistenersevent"
     },
     {
@@ -6046,7 +6046,7 @@
       "source_location": "L492",
       "_origin": "ast",
       "id": "src_main_java_com_skd_commontoolkit_dynreg_dynamicregistry_dynamicregistry_makecodecexception",
-      "community": 58,
+      "community": 42,
       "norm_label": ".makecodecexception()"
     },
     {
@@ -6056,7 +6056,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "codecexception",
-      "community": 58,
+      "community": 42,
       "norm_label": "codecexception"
     },
     {
@@ -6186,7 +6186,7 @@
       "source_location": "L588",
       "_origin": "ast",
       "id": "src_main_java_com_skd_commontoolkit_dynreg_dynamicregistry_datagenpopulator_register",
-      "community": 50,
+      "community": 30,
       "norm_label": ".register()"
     },
     {
@@ -6426,7 +6426,7 @@
       "source_location": "L43",
       "_origin": "ast",
       "id": "src_main_java_com_skd_commontoolkit_dynreg_registryserializer_registryserializer_issynced",
-      "community": 58,
+      "community": 8,
       "norm_label": ".issynced()"
     },
     {
@@ -6456,7 +6456,7 @@
       "source_location": "L86",
       "_origin": "ast",
       "id": "src_main_java_com_skd_commontoolkit_dynreg_registryserializer_registryserializer_subtyped",
-      "community": 8,
+      "community": 2,
       "norm_label": ".subtyped()"
     },
     {
@@ -6466,7 +6466,7 @@
       "source_location": "L98",
       "_origin": "ast",
       "id": "src_main_java_com_skd_commontoolkit_dynreg_registryserializer_registryserializer_subtypedsynced",
-      "community": 8,
+      "community": 2,
       "norm_label": ".subtypedsynced()"
     },
     {
@@ -6746,7 +6746,7 @@
       "source_location": "L33",
       "_origin": "ast",
       "id": "src_main_java_com_skd_commontoolkit_dynreg_syncmanagement_syncmanagement_registerforsync",
-      "community": 58,
+      "community": 7,
       "norm_label": ".registerforsync()"
     },
     {
@@ -7166,7 +7166,7 @@
       "source_location": "L49",
       "_origin": "ast",
       "id": "src_main_java_com_skd_commontoolkit_dynreg_weighteddynamicregistry_weighteddynamicregistry_onreload",
-      "community": 5,
+      "community": 8,
       "norm_label": ".onreload()"
     },
     {
@@ -7346,7 +7346,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_main_java_com_skd_commontoolkit_dynreg_tag_dynamicholderset",
-      "community": 30,
+      "community": 22,
       "norm_label": "dynamicholderset.java"
     },
     {
@@ -7356,7 +7356,7 @@
       "source_location": "L33",
       "_origin": "ast",
       "id": "src_main_java_com_skd_commontoolkit_dynreg_tag_dynamicholderset_dynamicholderset",
-      "community": 30,
+      "community": 22,
       "norm_label": "dynamicholderset"
     },
     {
@@ -7366,7 +7366,7 @@
       "source_location": "L35",
       "_origin": "ast",
       "id": "src_main_java_com_skd_commontoolkit_dynreg_tag_dynamicholderset_dynamicholderset_stream",
-      "community": 30,
+      "community": 22,
       "norm_label": ".stream()"
     },
     {
@@ -7386,7 +7386,7 @@
       "source_location": "L39",
       "_origin": "ast",
       "id": "src_main_java_com_skd_commontoolkit_dynreg_tag_dynamicholderset_dynamicholderset_contains",
-      "community": 30,
+      "community": 22,
       "norm_label": ".contains()"
     },
     {
@@ -7396,7 +7396,7 @@
       "source_location": "L46",
       "_origin": "ast",
       "id": "src_main_java_com_skd_commontoolkit_dynreg_tag_dynamicholderset_dynamicholderset_unwrapkey",
-      "community": 30,
+      "community": 22,
       "norm_label": ".unwrapkey()"
     },
     {
@@ -7426,7 +7426,7 @@
       "source_location": "L58",
       "_origin": "ast",
       "id": "src_main_java_com_skd_commontoolkit_dynreg_tag_dynamicholderset_dynamicholderset_isbound",
-      "community": 30,
+      "community": 22,
       "norm_label": ".isbound()"
     },
     {
@@ -7436,7 +7436,7 @@
       "source_location": "L63",
       "_origin": "ast",
       "id": "src_main_java_com_skd_commontoolkit_dynreg_tag_dynamicholderset_dynamicholderset_getrandomelement",
-      "community": 30,
+      "community": 22,
       "norm_label": ".getrandomelement()"
     },
     {
@@ -7446,7 +7446,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "src_main_java_com_skd_commontoolkit_dynreg_tag_dynamicholderset_java_randomsource",
-      "community": 30,
+      "community": 22,
       "norm_label": "randomsource"
     },
     {
@@ -7456,7 +7456,7 @@
       "source_location": "L68",
       "_origin": "ast",
       "id": "src_main_java_com_skd_commontoolkit_dynreg_tag_dynamicholderset_dynamicholderset_direct",
-      "community": 30,
+      "community": 22,
       "norm_label": ".direct()"
     },
     {
@@ -7466,7 +7466,7 @@
       "source_location": "L75",
       "_origin": "ast",
       "id": "src_main_java_com_skd_commontoolkit_dynreg_tag_dynamicholderset_dynamicholderset_empty",
-      "community": 30,
+      "community": 22,
       "norm_label": ".empty()"
     },
     {
@@ -7476,7 +7476,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "src_main_java_com_skd_commontoolkit_dynreg_tag_dynamicholderset_java_suppresswarnings",
-      "community": 30,
+      "community": 22,
       "norm_label": "suppresswarnings"
     },
     {
@@ -7486,7 +7486,7 @@
       "source_location": "L90",
       "_origin": "ast",
       "id": "src_main_java_com_skd_commontoolkit_dynreg_tag_dynamicholderset_dynamicholderset_codec",
-      "community": 30,
+      "community": 22,
       "norm_label": ".codec()"
     },
     {
@@ -7496,7 +7496,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "src_main_java_com_skd_commontoolkit_dynreg_tag_dynamicholderset_java_codec",
-      "community": 30,
+      "community": 22,
       "norm_label": "codec"
     },
     {
@@ -7506,7 +7506,7 @@
       "source_location": "L109",
       "_origin": "ast",
       "id": "src_main_java_com_skd_commontoolkit_dynreg_tag_dynamicholderset_dynamicholderset_streamcodec",
-      "community": 30,
+      "community": 22,
       "norm_label": ".streamcodec()"
     },
     {
@@ -7516,7 +7516,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "src_main_java_com_skd_commontoolkit_dynreg_tag_dynamicholderset_java_streamcodec",
-      "community": 30,
+      "community": 22,
       "norm_label": "streamcodec"
     },
     {
@@ -7526,7 +7526,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "src_main_java_com_skd_commontoolkit_dynreg_tag_dynamicholderset_java_registryfriendlybytebuf",
-      "community": 30,
+      "community": 22,
       "norm_label": "registryfriendlybytebuf"
     },
     {
@@ -7626,7 +7626,7 @@
       "source_location": "L205",
       "_origin": "ast",
       "id": "src_main_java_com_skd_commontoolkit_dynreg_tag_dynamicholderset_named_contains",
-      "community": 58,
+      "community": 15,
       "norm_label": ".contains()"
     },
     {
@@ -7666,7 +7666,7 @@
       "source_location": "L233",
       "_origin": "ast",
       "id": "src_main_java_com_skd_commontoolkit_dynreg_tag_dynamicholderset_named_getrandomelement",
-      "community": 30,
+      "community": 22,
       "norm_label": ".getrandomelement()"
     },
     {
@@ -7776,7 +7776,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_main_java_com_skd_commontoolkit_dynreg_tag_dynamictagkey",
-      "community": 51,
+      "community": 22,
       "norm_label": "dynamictagkey.java"
     },
     {
@@ -7796,7 +7796,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "src_main_java_com_skd_commontoolkit_dynreg_tag_dynamictagkey_java_identifier",
-      "community": 51,
+      "community": 22,
       "norm_label": "identifier"
     },
     {
@@ -7806,7 +7806,7 @@
       "source_location": "L23",
       "_origin": "ast",
       "id": "src_main_java_com_skd_commontoolkit_dynreg_tag_dynamictagkey_dynamictagkey_create",
-      "community": 51,
+      "community": 22,
       "norm_label": ".create()"
     },
     {
@@ -7816,7 +7816,7 @@
       "source_location": "L32",
       "_origin": "ast",
       "id": "src_main_java_com_skd_commontoolkit_dynreg_tag_dynamictagkey_dynamictagkey_codec",
-      "community": 51,
+      "community": 22,
       "norm_label": ".codec()"
     },
     {
@@ -7826,7 +7826,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "src_main_java_com_skd_commontoolkit_dynreg_tag_dynamictagkey_java_codec",
-      "community": 51,
+      "community": 22,
       "norm_label": "codec"
     },
     {
@@ -7836,7 +7836,7 @@
       "source_location": "L39",
       "_origin": "ast",
       "id": "src_main_java_com_skd_commontoolkit_dynreg_tag_dynamictagkey_dynamictagkey_streamcodec",
-      "community": 51,
+      "community": 22,
       "norm_label": ".streamcodec()"
     },
     {
@@ -7846,7 +7846,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "src_main_java_com_skd_commontoolkit_dynreg_tag_dynamictagkey_java_streamcodec",
-      "community": 51,
+      "community": 22,
       "norm_label": "streamcodec"
     },
     {
@@ -7856,7 +7856,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "src_main_java_com_skd_commontoolkit_dynreg_tag_dynamictagkey_java_bytebuf",
-      "community": 51,
+      "community": 22,
       "norm_label": "bytebuf"
     },
     {
@@ -7996,7 +7996,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_main_java_com_skd_commontoolkit_dynreg_tag_scannedtags",
-      "community": 42,
+      "community": 27,
       "norm_label": "scannedtags.java"
     },
     {
@@ -8006,7 +8006,7 @@
       "source_location": "L16",
       "_origin": "ast",
       "id": "src_main_java_com_skd_commontoolkit_dynreg_tag_scannedtags_scannedtags",
-      "community": 42,
+      "community": 27,
       "norm_label": "scannedtags"
     },
     {
@@ -8016,7 +8016,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "src_main_java_com_skd_commontoolkit_dynreg_tag_scannedtags_java_identifier",
-      "community": 42,
+      "community": 27,
       "norm_label": "identifier"
     },
     {
@@ -8026,7 +8026,7 @@
       "source_location": "L18",
       "_origin": "ast",
       "id": "src_main_java_com_skd_commontoolkit_dynreg_tag_scannedtags_scannedtags_resolve",
-      "community": 42,
+      "community": 27,
       "norm_label": ".resolve()"
     },
     {
@@ -8526,7 +8526,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_main_java_com_skd_commontoolkit_json_jsonutil",
-      "community": 29,
+      "community": 51,
       "norm_label": "jsonutil.java"
     },
     {
@@ -8536,7 +8536,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "src_main_java_com_skd_commontoolkit_json_jsonutil_jsonutil",
-      "community": 29,
+      "community": 51,
       "norm_label": "jsonutil"
     },
     {
@@ -8546,7 +8546,7 @@
       "source_location": "L16",
       "_origin": "ast",
       "id": "src_main_java_com_skd_commontoolkit_json_jsonutil_jsonutil_checkandlogempty",
-      "community": 29,
+      "community": 51,
       "norm_label": ".checkandlogempty()"
     },
     {
@@ -8556,7 +8556,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "src_main_java_com_skd_commontoolkit_json_jsonutil_java_jsonelement",
-      "community": 29,
+      "community": 51,
       "norm_label": "jsonelement"
     },
     {
@@ -8566,7 +8566,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "src_main_java_com_skd_commontoolkit_json_jsonutil_java_identifier",
-      "community": 29,
+      "community": 51,
       "norm_label": "identifier"
     },
     {
@@ -8576,7 +8576,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "src_main_java_com_skd_commontoolkit_json_jsonutil_java_logger",
-      "community": 29,
+      "community": 51,
       "norm_label": "logger"
     },
     {
@@ -8586,7 +8586,7 @@
       "source_location": "L36",
       "_origin": "ast",
       "id": "src_main_java_com_skd_commontoolkit_json_jsonutil_jsonutil_checkconditions",
-      "community": 29,
+      "community": 51,
       "norm_label": ".checkconditions()"
     },
     {
@@ -8596,7 +8596,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "src_main_java_com_skd_commontoolkit_json_jsonutil_java_conditionalops",
-      "community": 29,
+      "community": 51,
       "norm_label": "conditionalops"
     },
     {
@@ -11676,7 +11676,7 @@
       "source_location": "L106",
       "_origin": "ast",
       "id": "src_main_java_com_skd_commontoolkit_registry_deferredhelper_deferredhelper",
-      "community": 36,
+      "community": 35,
       "norm_label": "deferredhelper"
     },
     {
@@ -11726,7 +11726,7 @@
       "source_location": "L130",
       "_origin": "ast",
       "id": "src_main_java_com_skd_commontoolkit_registry_deferredhelper_deferredhelper_create",
-      "community": 36,
+      "community": 35,
       "norm_label": ".create()"
     },
     {
@@ -11736,7 +11736,7 @@
       "source_location": "L134",
       "_origin": "ast",
       "id": "src_main_java_com_skd_commontoolkit_registry_deferredhelper_deferredhelper_deferredhelper",
-      "community": 36,
+      "community": 35,
       "norm_label": ".deferredhelper()"
     },
     {
@@ -11756,7 +11756,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "registrybuilder",
-      "community": 35,
+      "community": 23,
       "norm_label": "registrybuilder"
     },
     {
@@ -12536,7 +12536,7 @@
       "source_location": "L603",
       "_origin": "ast",
       "id": "src_main_java_com_skd_commontoolkit_registry_deferredhelper_deferredhelper_customdh",
-      "community": 36,
+      "community": 35,
       "norm_label": ".customdh()"
     },
     {
@@ -15566,7 +15566,7 @@
       "source_location": "L98",
       "_origin": "ast",
       "id": "src_main_java_com_skd_commontoolkit_util_offset_offset_save",
-      "community": 11,
+      "community": 13,
       "norm_label": ".save()"
     },
     {
@@ -15816,7 +15816,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_main_java_com_skd_commontoolkit_util_runnablereloader",
-      "community": 40,
+      "community": 27,
       "norm_label": "runnablereloader.java"
     },
     {
@@ -15826,7 +15826,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "src_main_java_com_skd_commontoolkit_util_runnablereloader_runnablereloader",
-      "community": 40,
+      "community": 27,
       "norm_label": "runnablereloader"
     },
     {
@@ -15836,7 +15836,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "unit",
-      "community": 40,
+      "community": 27,
       "norm_label": "unit"
     },
     {
@@ -15846,7 +15846,7 @@
       "source_location": "L15",
       "_origin": "ast",
       "id": "src_main_java_com_skd_commontoolkit_util_runnablereloader_runnablereloader_runnablereloader",
-      "community": 40,
+      "community": 27,
       "norm_label": ".runnablereloader()"
     },
     {
@@ -15856,7 +15856,7 @@
       "source_location": "L19",
       "_origin": "ast",
       "id": "src_main_java_com_skd_commontoolkit_util_runnablereloader_runnablereloader_prepare",
-      "community": 40,
+      "community": 27,
       "norm_label": ".prepare()"
     },
     {
@@ -15866,7 +15866,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "src_main_java_com_skd_commontoolkit_util_runnablereloader_java_resourcemanager",
-      "community": 40,
+      "community": 27,
       "norm_label": "resourcemanager"
     },
     {
@@ -15876,7 +15876,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "src_main_java_com_skd_commontoolkit_util_runnablereloader_java_profilerfiller",
-      "community": 40,
+      "community": 27,
       "norm_label": "profilerfiller"
     },
     {
@@ -15886,7 +15886,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "src_main_java_com_skd_commontoolkit_util_runnablereloader_java_override",
-      "community": 40,
+      "community": 27,
       "norm_label": "override"
     },
     {
@@ -15896,7 +15896,7 @@
       "source_location": "L24",
       "_origin": "ast",
       "id": "src_main_java_com_skd_commontoolkit_util_runnablereloader_runnablereloader_apply",
-      "community": 40,
+      "community": 27,
       "norm_label": ".apply()"
     },
     {
@@ -15906,7 +15906,7 @@
       "source_location": "L29",
       "_origin": "ast",
       "id": "src_main_java_com_skd_commontoolkit_util_runnablereloader_runnablereloader_of",
-      "community": 40,
+      "community": 27,
       "norm_label": ".of()"
     },
     {
@@ -16276,7 +16276,7 @@
       "source_location": "L83",
       "_origin": "ast",
       "id": "src_main_java_com_skd_commontoolkit_util_data_dynamicregistryprovider_dynamicregistryprovider_add",
-      "community": 50,
+      "community": 30,
       "norm_label": ".add()"
     },
     {
@@ -16286,7 +16286,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "src_main_java_com_skd_commontoolkit_util_data_dynamicregistryprovider_java_identifier",
-      "community": 50,
+      "community": 30,
       "norm_label": "identifier"
     },
     {
@@ -16296,7 +16296,7 @@
       "source_location": "L100",
       "_origin": "ast",
       "id": "src_main_java_com_skd_commontoolkit_util_data_dynamicregistryprovider_dynamicregistryprovider_addconditionally",
-      "community": 50,
+      "community": 30,
       "norm_label": ".addconditionally()"
     },
     {
@@ -16760,46 +16760,6 @@
       "norm_label": "0.0.0-beta.1"
     },
     {
-      "label": "[0.0.0-beta.2] - 2026-08-05",
-      "file_type": "document",
-      "source_file": "CHANGELOG.md",
-      "source_location": "L7",
-      "_origin": "ast",
-      "id": "changelog_0_0_0_beta_2_2026_08_05",
-      "community": 71,
-      "norm_label": "[0.0.0-beta.2] - 2026-08-05"
-    },
-    {
-      "label": "Change",
-      "file_type": "document",
-      "source_file": "CHANGELOG.md",
-      "source_location": "L9",
-      "_origin": "ast",
-      "id": "changelog_change",
-      "community": 71,
-      "norm_label": "change"
-    },
-    {
-      "label": "[mmon Toolkit \u2014 Registro de cambios",
-      "file_type": "document",
-      "source_file": "CHANGELOG.md",
-      "source_location": "L13",
-      "_origin": "ast",
-      "id": "changelog_mmon_toolkit_registro_de_cambios",
-      "community": 71,
-      "norm_label": "[mmon toolkit \u2014 registro de cambios"
-    },
-    {
-      "label": "0.0.0-beta.1",
-      "file_type": "document",
-      "source_file": "CHANGELOG.md",
-      "source_location": "L15",
-      "_origin": "ast",
-      "id": "changelog_0_0_0_beta_1_15",
-      "community": 71,
-      "norm_label": "0.0.0-beta.1"
-    },
-    {
       "label": "NOTICE.md",
       "file_type": "document",
       "source_file": "NOTICE.md",
@@ -17168,16 +17128,6 @@
       "id": "docs_curseforge_versions_0_0_0_beta_1",
       "community": 73,
       "norm_label": "0.0.0-beta.1.md"
-    },
-    {
-      "label": "0.0.0-beta.2.md",
-      "file_type": "document",
-      "source_file": "docs/curseforge/versions/0.0.0-beta.2.md",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "docs_curseforge_versions_0_0_0_beta_2",
-      "community": 75,
-      "norm_label": "0.0.0-beta.2.md"
     },
     {
       "file_type": "image",
@@ -54301,46 +54251,6 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "CHANGELOG.md",
-      "source_location": "L15",
-      "weight": 1.0,
-      "source": "changelog_common_toolkit_registro_de_cambios",
-      "target": "changelog_0_0_0_beta_1_15",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "CHANGELOG.md",
-      "source_location": "L7",
-      "weight": 1.0,
-      "source": "changelog_common_toolkit_registro_de_cambios",
-      "target": "changelog_0_0_0_beta_2_2026_08_05",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "CHANGELOG.md",
-      "source_location": "L13",
-      "weight": 1.0,
-      "source": "changelog_common_toolkit_registro_de_cambios",
-      "target": "changelog_mmon_toolkit_registro_de_cambios",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "CHANGELOG.md",
-      "source_location": "L9",
-      "weight": 1.0,
-      "source": "changelog_0_0_0_beta_2_2026_08_05",
-      "target": "changelog_change",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
       "source_file": "NOTICE.md",
       "source_location": "L1",
       "weight": 1.0,
@@ -54660,5 +54570,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "a2719649f9010a584cfb86629a0e46ad29e996a4"
+  "built_at_commit": "27f6804e4184da1417c93b839b704f34696b2d22"
 }

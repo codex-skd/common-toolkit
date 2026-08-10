@@ -5,7 +5,7 @@
 project_id = 1638419
 api_token = ee776b0a-ee95-4850-b554-06be02a8657f
 game_versions = 9638, 9639, 16498, 10150
-release_type = beta
+release_type = release
 
 ## Proyecto
 
@@ -68,7 +68,7 @@ Ejemplo (primera beta): `26.2-neoforge-beta.1`
 | `displayName` | `Common Toolkit (0.0.0-beta.1)` | Nombre visible: `display_name (version)` |
 | `changelog` | HTML (no Markdown) | Ver estructura abajo |
 | `changelogType` | `html` | Obligatorio para que se vea bien |
-| `release_type` | `beta` | Primera subida — no promocionar a `release` hasta validar en servidor real |
+| `release_type` | `release` | Desde v1.0.0: primer release estable, validado. Versiones previas (beta.X) usaron `beta` |
 | `gameVersionNames` | `["Client", "Server", "26.2", "NeoForge"]` | Entorno + MC + modloader |
 
 ## Estructura del changelog (HTML)

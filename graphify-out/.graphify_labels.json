@@ -74,5 +74,12 @@
   "72": "project_description.md",
   "73": "0.0.0-beta.1.md",
   "74": "Type",
-  "75": "0.0.0-beta.2.md"
+  "75": "0.0.0-beta.2.md",
+  "76": "TickingBlockEntityType.java",
+  "77": "GearSet",
+  "78": "WeightedItemStack",
+  "79": ".elementCodec",
+  "80": "GearSetRegistry.java",
+  "81": "ILuckyWeighted",
+  "82": "1.0.0.md"
 }

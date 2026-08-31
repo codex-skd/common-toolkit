@@ -38,6 +38,10 @@ base {
 // MC 1.21.1 targets Java 21.
 java.toolchain.languageVersion = JavaLanguageVersion.of(21)
 
+java {
+    withSourcesJar()
+}
+
 neoForge {
     // Specify the version of NeoForge to use.
     version = project.neo_version
@@ -182,4 +186,11 @@ idea {
         downloadSources = true
         downloadJavadoc = true
     }
+}
+
+// Bundle the LGPL-2.1 text and the third-party attribution into every published artifact
+// (this project embeds LGPL-2.1 code from Minecraft Forge's config system; see NOTICE.md).
+tasks.withType(Jar).configureEach {
+    from(rootProject.file('COPYING.LESSER'))
+    from(rootProject.file('NOTICE.md'))
 }

@@ -13,15 +13,17 @@ A mechanical baseline is already in place in this repo and **compiles**
 (`compileJava` = BUILD SUCCESSFUL). Your job is to reconcile it with the 26.2
 fork's feature set while keeping strict 1.21.1 API.
 
-## Absolute paths you will use
+## Paths — ALL inside the work dir (your sandbox blocks reads outside --dir)
 
-| What | Path |
+| What | Path (relative to work dir) |
 |---|---|
-| **Work dir** (edit here) | `G:/Proyectos/Mods_Minecraft/common_toolkit/neoforge/1.21.1` |
-| Placebo 1.21.1 source (upstream, 1.21.1 API reference) | `C:/Users/llagu/Downloads/Placebo-1.21/src/main/java/dev/shadowsoffire/placebo` |
-| Placebo 1.21.1 resources | `C:/Users/llagu/Downloads/Placebo-1.21/src/main/resources` |
-| CT 26.2 source (feature reference — DO NOT copy 26.2 API) | `G:/Proyectos/Mods_Minecraft/common_toolkit/neoforge/26.2/src/main/java/com/skd/commontoolkit` |
-| CT 26.2 repo root (resources, mods.toml template, mixins json, NOTICE, docs) | `G:/Proyectos/Mods_Minecraft/common_toolkit/neoforge/26.2` |
+| **Work dir** (edit here) | `.` |
+| Placebo 1.21.1 Java source (1.21.1 API reference) | `temp/ref/placebo-1.21.1-java/dev/shadowsoffire/placebo/` |
+| Placebo 1.21.1 resources | `temp/ref/placebo-1.21.1-resources/` |
+| CT 26.2 Java source (feature reference — DO NOT copy 26.2 API) | `temp/ref/ct-26.2-java/com/skd/commontoolkit/` |
+| CT 26.2 resources (mods.toml template, mixins json, lang, NOTICE) | `temp/ref/ct-26.2-resources/` |
+
+`temp/` is gitignored — read-only reference, not a deliverable. All output goes under `src/`.
 
 The current baseline in the work dir = Placebo 1.21.1, renamed:
 `dev.shadowsoffire.placebo` -> `com.skd.commontoolkit`, `Placebo*` classes ->
@@ -79,7 +81,7 @@ src/main/java/com/skd/commontoolkit/systems/wanderer/WandererTradesRegistry.java
 
 Then fix every reference so the project still compiles, matching how CT 26.2
 handled it (compare each file below against
-`common_toolkit/neoforge/26.2/src/main/java/com/skd/commontoolkit/...`):
+`temp/ref/ct-26.2-java/com/skd/commontoolkit/...`):
 
 - `menu/SimpleDataSlots.java` — CT 26.2 removed the `ModifiableEnergyStorage`
   support (`addEnergy`, the `EnergyDataSlot` inner class). Align this file to the
@@ -102,7 +104,7 @@ handled it (compare each file below against
 
 ## TASK B — Port the 14 files the 26.2 fork ADDED on top of Placebo
 
-These exist in `common_toolkit/neoforge/26.2/src/main/java/com/skd/commontoolkit/`
+These exist in `temp/ref/ct-26.2-java/com/skd/commontoolkit/`
 but not in the baseline. Recreate each in the work dir at the same relative
 path, taking the 26.2 file as the starting point and **down-porting its API to
 1.21.1 / NeoForge 21.1.249** (use the Placebo 1.21.1 tree + the already-working
@@ -208,7 +210,7 @@ wires the tag system, apply the equivalent on 1.21.1 API.
   the baseline Java still references a key that only exists under the old
   `placebo.` prefix in the Placebo lang file, add the `common_toolkit.`-prefixed
   key to `en_us.json` (copy the English string from
-  `C:/Users/llagu/Downloads/Placebo-1.21/src/main/resources/assets/placebo/lang/en_us.json`).
+  `temp/ref/placebo-1.21.1-resources/assets/placebo/lang/en_us.json`).
 
 ## Deliverable
 

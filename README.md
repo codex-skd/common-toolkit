@@ -29,4 +29,5 @@ The jar will be generated at `build/libs/common_toolkit-<minecraft_version>-neof
 ## Credits
 
 - Ported from [Placebo](https://www.curseforge.com/minecraft/mc-mods/placebo) by **Shadows_of_Fire** (MIT License). See [NOTICE.md](NOTICE.md) for the full license text and per-file attributions.
+- **License**: distributed under the **GNU LGPL v2.1 or later** (`COPYING.LESSER`), because the `com.skd.commontoolkit.config` package derives from Minecraft Forge's LGPL-2.1 legacy config code. The Placebo-derived remainder is additionally available under the **MIT License** (see `NOTICE.md`). A `-sources.jar` is published with every release.
 - Developed by **Stalking Dragons** — [https://codex.skdragons.com/](https://codex.skdragons.com/).

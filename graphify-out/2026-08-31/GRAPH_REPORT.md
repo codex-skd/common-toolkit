@@ -1,16 +1,16 @@
 # Graph Report - 1.21.1  (2026-08-31)
 
 ## Corpus Check
-- 121 files · ~101,309 words
+- 120 files · ~100,980 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 1727 nodes · 3473 edges · 82 communities (73 shown, 9 thin omitted)
+- 1727 nodes · 3477 edges · 83 communities (76 shown, 7 thin omitted)
 - Extraction: 95% EXTRACTED · 5% INFERRED · 0% AMBIGUOUS · INFERRED: 171 edges (avg confidence: 0.8)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `ec7d06a6`
+- Built from commit: `09503e2a`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -77,10 +77,12 @@
 - LockedSlot.java
 - FilteredSlot
 - .getId
+- .addSlotListener
 - AnvilBlockMixin.java
 - RunnableReloader
 - EnchantmentUtils
 - JsonUtil.java
+- InternalItemHandler
 - GradientColor.java
 - ConfigFlags.java
 - LinearEquation
@@ -120,43 +122,43 @@
 ## Import Cycles
 - None detected.
 
-## Communities (82 total, 9 thin omitted)
+## Communities (83 total, 7 thin omitted)
 
 ### Community 0 - "Override"
 Cohesion: 0.06
 Nodes (20): BiMap, ForwardingMap, ForwardingMapEntry, ForwardingSet, ObjectInputStream, ObjectOutputStream, DynRegBiMap, ResourceLocation (+12 more)
 
 ### Community 1 - "DynRegPayloads.java"
-Cohesion: 0.20
-Nodes (16): CustomPacketPayload, Content, End, ByteBuf, ConnectionProtocol, Either, FriendlyByteBuf, IPayloadContext (+8 more)
+Cohesion: 0.08
+Nodes (35): CustomPacketPayload, Content, DynRegPayloads, End, ByteBuf, ConnectionProtocol, Either, FriendlyByteBuf (+27 more)
 
 ### Community 2 - "GearSet"
 Cohesion: 0.06
 Nodes (28): IntrusiveBase, CodecProvider, Codec, IDimensional, ILuckyWeighted, Level, Logger, Nullable (+20 more)
 
 ### Community 3 - "PayloadProvider"
-Cohesion: 0.10
-Nodes (19): HandlerThread, IPayloadHandler, RegisterPayloadHandlersEvent, ConnectionProtocol, IPayloadContext, Override, PacketFlow, SubscribeEvent (+11 more)
+Cohesion: 0.07
+Nodes (30): HandlerThread, IPayloadHandler, RegisterPayloadHandlersEvent, ConnectionProtocol, IPayloadContext, Override, PacketFlow, SubscribeEvent (+22 more)
 
 ### Community 4 - "CodecMap"
 Cohesion: 0.09
 Nodes (26): Codec, CodecMap, BiMap, DataResult, DynamicOps, Nullable, Override, Pair (+18 more)
 
 ### Community 6 - "StepFunction"
-Cohesion: 0.06
-Nodes (31): AttributeModifier, Float2FloatFunction, Operation, CommonToolkitCodecs, BiMap, Codec, Deprecated, ResourceLocation (+23 more)
+Cohesion: 0.07
+Nodes (26): AttributeModifier, Float2FloatFunction, Operation, ResourceLocation, ChancedEffectInstance, Codec, Holder, MobEffect (+18 more)
 
 ### Community 7 - "Builder"
 Cohesion: 0.07
-Nodes (25): Overwrite, PackType, FieldOrderingFactory, Impl, Internal, JsonElement, Nullable, Object2IntOpenHashMap (+17 more)
+Nodes (21): Overwrite, PackType, FieldOrderingFactory, Impl, Internal, JsonElement, Nullable, Object2IntOpenHashMap (+13 more)
 
 ### Community 9 - "DataGenBuilder.java"
-Cohesion: 0.10
-Nodes (23): DataProvider, ExistingFileHelper, ICondition, RegistryBootstrap, RegistrySetBuilder, DataGenBuilder, DataProviderFactory, Factory (+15 more)
+Cohesion: 0.08
+Nodes (30): DataGenerator, DataProvider, ExistingFileHelper, GatherDataEventGenerator, ICondition, PackResources, RegistryBootstrap, RegistrySetBuilder (+22 more)
 
 ### Community 10 - "TickableTextList"
-Cohesion: 0.11
-Nodes (14): DisplayMode, Font, FormattedCharSequence, FormattedCharSink, Matrix4f, MultiBufferSource, MutableFloat, FormattedText (+6 more)
+Cohesion: 0.08
+Nodes (21): DisplayMode, Font, FormattedCharSequence, FormattedCharSink, Matrix4f, MultiBufferSource, MutableFloat, AbstractContainerScreenMixin (+13 more)
 
 ### Community 11 - "Configuration"
 Cohesion: 0.09
@@ -179,8 +181,8 @@ Cohesion: 0.11
 Nodes (24): Item, MapCodec, MapLike, ModifyConstant, RecordBuilder, RegistryOps, HandToJsonCommand, CommandSourceStack (+16 more)
 
 ### Community 16 - "MixRegistry"
-Cohesion: 0.15
-Nodes (18): codec(), forType(), Codec, Holder, Ingredient, MapCodec, Mix, Override (+10 more)
+Cohesion: 0.14
+Nodes (19): ServerAboutToStartEvent, codec(), forType(), Codec, Holder, Ingredient, MapCodec, Mix (+11 more)
 
 ### Community 17 - "ConfigCategory"
 Cohesion: 0.09
@@ -195,16 +197,16 @@ Cohesion: 0.14
 Nodes (16): ServerStartedEvent, ServerStoppedEvent, CommonToolkitTaskQueue, DelayedTask, Impl, EventBusSubscriber, FunctionalInterface, Override (+8 more)
 
 ### Community 20 - "DynamicRegistry"
-Cohesion: 0.12
-Nodes (8): DynamicRegistry, Logger, Nullable, ResourceLocation, Delegated, Internal, Override, RegistryCallback
+Cohesion: 0.14
+Nodes (8): DynamicRegistry, ByteBuf, OnDatapackSyncEvent, StreamCodec, Delegated, Internal, Override, RegistryCallback
 
 ### Community 21 - "DeferredHelper.java"
 Cohesion: 0.10
 Nodes (19): AttachmentType, EntityFactory, EntityType, Feature, Fluid, IAttachmentHolder, MobCategory, NewRegistryEvent (+11 more)
 
 ### Community 22 - "DynamicRegistry.java"
-Cohesion: 0.33
-Nodes (8): SimplePreparableReloadListener, DynamicTagManager, ConditionalOps, JsonElement, Override, ProfilerFiller, ResourceLocation, ResourceManager
+Cohesion: 0.14
+Nodes (14): CodecException, SimplePreparableReloadListener, AddReloadListenerEvent, BiMap, Logger, DynamicTagManager, ConditionalOps, JsonElement (+6 more)
 
 ### Community 23 - "Offset.java"
 Cohesion: 0.12
@@ -227,7 +229,7 @@ Cohesion: 0.12
 Nodes (13): FMLClientSetupEvent, ItemTooltipEvent, MouseScrollingEvent, Pre, RegisterClientReloadListenersEvent, CommonToolkitClient, EventBusSubscriber, ItemStack (+5 more)
 
 ### Community 28 - "DynamicHolder"
-Cohesion: 0.16
+Cohesion: 0.15
 Nodes (4): DynamicHolder, Override, ResourceLocation, SuppressWarnings
 
 ### Community 29 - ".register"
@@ -235,16 +237,16 @@ Cohesion: 0.11
 Nodes (10): DataComponentType, DeferredBlock, IngredientType, LootItemCondition, LootItemConditionType, LootPoolEntryType, RegisterEvent, SimpleParticleType (+2 more)
 
 ### Community 30 - "DynamicTagKey"
-Cohesion: 0.14
-Nodes (8): Internal, Named, DynamicTagKey, ByteBuf, Codec, Override, ResourceLocation, StreamCodec
+Cohesion: 0.16
+Nodes (7): Named, DynamicTagKey, ByteBuf, Codec, Override, ResourceLocation, StreamCodec
 
 ### Community 31 - "TagLoader.java"
-Cohesion: 0.17
-Nodes (14): Lookup, SequencedSet, ResourceLocation, ScannedTags, EntryWithSource, ConditionalOps, JsonElement, Logger (+6 more)
+Cohesion: 0.21
+Nodes (12): Lookup, SequencedSet, EntryWithSource, ConditionalOps, JsonElement, Logger, Override, ResourceLocation (+4 more)
 
 ### Community 32 - "DynamicHolderSet"
-Cohesion: 0.12
-Nodes (9): DynamicHolderSet, Codec, Either, RegistryFriendlyByteBuf, StreamCodec, SuppressWarnings, GearSetRegistry, Nullable (+1 more)
+Cohesion: 0.14
+Nodes (8): DynamicHolderSet, Either, RegistryFriendlyByteBuf, StreamCodec, SuppressWarnings, GearSetRegistry, Nullable, RandomSource
 
 ### Community 33 - "CachedObject"
 Cohesion: 0.20
@@ -255,28 +257,28 @@ Cohesion: 0.21
 Nodes (11): ITabFiller, BuildCreativeModeTabContentsEvent, CreativeModeTab, ItemLike, BuildCreativeModeTabContentsEvent, CreativeModeTab, Internal, ItemLike (+3 more)
 
 ### Community 35 - "CommonToolkitContainerMenu"
-Cohesion: 0.05
-Nodes (34): AbstractContainerMenu, IItemHandler, ItemStackHandler, Slot, SlotItemHandler, InternalItemHandler, ItemStack, CommonToolkitContainerMenu (+26 more)
+Cohesion: 0.19
+Nodes (10): AbstractContainerMenu, IItemHandler, CommonToolkitContainerMenu, Inventory, ItemStack, Level, MenuType, Override (+2 more)
 
 ### Community 36 - "SimpleDataSlots.java"
 Cohesion: 0.22
 Nodes (9): BooleanConsumer, BooleanSupplier, DataSlot, IntConsumer, IntSupplier, IDataAutoRegister, Override, LambdaDataSlot (+1 more)
 
 ### Community 37 - "DataGenPopulator"
-Cohesion: 0.20
-Nodes (6): MustBeInvokedByOverriders, DataGenPopulator, ReloadType, DEDICATED_CLIENT, INTEGRATED_CLIENT, SERVER
+Cohesion: 0.16
+Nodes (7): MustBeInvokedByOverriders, DataGenPopulator, Internal, ReloadType, DEDICATED_CLIENT, INTEGRATED_CLIENT, SERVER
 
 ### Community 38 - "Type"
 Cohesion: 0.12
 Nodes (10): Pattern, Pattern, tryParse(), Type, BOOLEAN, COLOR, DOUBLE, INTEGER (+2 more)
 
 ### Community 39 - "RegistrySerializer"
-Cohesion: 0.25
+Cohesion: 0.29
 Nodes (7): Codec, Nullable, Override, RegistryFriendlyByteBuf, StreamCodec, RegistrySerializer, Simple
 
 ### Community 41 - "CommonToolkit.java"
-Cohesion: 0.17
-Nodes (10): FMLCommonSetupEvent, IEventBus, Mod, RegisterCommandsEvent, ServerAboutToStartEvent, CommonToolkit, AddReloadListenerEvent, Logger (+2 more)
+Cohesion: 0.19
+Nodes (9): FMLCommonSetupEvent, IEventBus, Mod, RegisterCommandsEvent, CommonToolkit, AddReloadListenerEvent, Logger, SubscribeEvent (+1 more)
 
 ### Community 42 - ".write"
 Cohesion: 0.23
@@ -299,8 +301,8 @@ Cohesion: 0.20
 Nodes (8): ServerPlayer, CommonToolkitUtil, BlockPos, Component, Deprecated, ItemStack, SafeVarargs, SuppressWarnings
 
 ### Community 47 - "ResourceLocation"
-Cohesion: 0.17
-Nodes (10): CodecException, AddReloadListenerEvent, BiMap, ByteBuf, JsonElement, OnDatapackSyncEvent, Override, ProfilerFiller (+2 more)
+Cohesion: 0.21
+Nodes (6): JsonElement, Nullable, Override, ProfilerFiller, ResourceLocation, ResourceManager
 
 ### Community 48 - "NBTAdapter.java"
 Cohesion: 0.32
@@ -323,12 +325,12 @@ Cohesion: 0.27
 Nodes (7): Event, IModBusEvent, LogicalSide, Internal, RegisterFieldOrderingsEvent, ResourceManager, ResourceReloadEvent
 
 ### Community 53 - ".quickMoveStack"
-Cohesion: 0.20
-Nodes (11): ConnectionProtocol, Internal, IPayloadContext, Override, PacketFlow, RegistryFriendlyByteBuf, ResourceLocation, StreamCodec (+3 more)
+Cohesion: 0.33
+Nodes (6): ItemStack, Player, Slot, QuickMoveHandler, QuickMoveMenu, QuickMoveRule
 
 ### Community 54 - "CommonToolkitCodecs.java"
-Cohesion: 0.20
-Nodes (11): ButtonClickPayload, IButtonContainer, ConnectionProtocol, FriendlyByteBuf, IPayloadContext, Override, PacketFlow, RegistryFriendlyByteBuf (+3 more)
+Cohesion: 0.33
+Nodes (5): CommonToolkitCodecs, BiMap, Codec, Deprecated, ResourceLocation
 
 ### Community 55 - "AnvilLandEvent"
 Cohesion: 0.36
@@ -343,12 +345,24 @@ Cohesion: 0.18
 Nodes (10): Delegation brief — Common Toolkit: finish the 1.21.1 / NeoForge 21.1.249 port, Deliverable, HARD CONSTRAINTS (do not violate), Mission, Naming / identity rules (must hold everywhere), Paths — ALL inside the work dir (your sandbox blocks reads outside --dir), TASK A — Remove the subsystems the 26.2 fork dropped, TASK B — Port the 14 files the 26.2 fork ADDED on top of Placebo (+2 more)
 
 ### Community 58 - "CommonToolkitContainerScreen.java"
-Cohesion: 0.16
-Nodes (14): AbstractContainerScreen, MenuAccess, AbstractContainerScreenMixin, Mixin, CommonToolkitContainerScreen, Component, GuiGraphics, Inventory (+6 more)
+Cohesion: 0.31
+Nodes (7): AbstractContainerScreen, MenuAccess, CommonToolkitContainerScreen, Component, GuiGraphics, Inventory, Override
 
 ### Community 59 - "LockedSlot.java"
-Cohesion: 0.30
-Nodes (6): Internal, OnDatapackSyncEvent, RegistryFriendlyByteBuf, ResourceLocation, SuppressWarnings, SyncManagement
+Cohesion: 0.31
+Nodes (6): Slot, Inventory, ItemStack, Override, Player, LockedSlot
+
+### Community 60 - "FilteredSlot"
+Cohesion: 0.38
+Nodes (5): SlotItemHandler, FilteredSlot, ItemStack, Override, Player
+
+### Community 61 - ".getId"
+Cohesion: 0.24
+Nodes (3): Codec, Codec, ResourceLocation
+
+### Community 62 - ".addSlotListener"
+Cohesion: 0.22
+Nodes (4): Deprecated, IDataUpdateListener, ItemStack, SlotUpdateListener
 
 ### Community 63 - "AnvilBlockMixin.java"
 Cohesion: 0.36
@@ -361,6 +375,10 @@ Nodes (5): Override, ProfilerFiller, ResourceManager, RunnableReloader, Unit
 ### Community 66 - "JsonUtil.java"
 Cohesion: 0.50
 Nodes (5): ConditionalOps, JsonElement, Logger, ResourceLocation, JsonUtil
+
+### Community 67 - "InternalItemHandler"
+Cohesion: 0.43
+Nodes (3): ItemStackHandler, InternalItemHandler, ItemStack
 
 ### Community 68 - "GradientColor.java"
 Cohesion: 0.33
@@ -379,8 +397,8 @@ Cohesion: 0.40
 Nodes (3): IContainerFactory, MenuSupplier, MenuType
 
 ### Community 74 - "[0.0.0-beta.1] - 2026-08-31"
-Cohesion: 0.29
-Nodes (6): [0.0.0-beta.1] - 2026-08-31, [0.0.0-beta.2] - 2026-08-31, Added, Common Toolkit (1.21.1) — Registro de cambios, Fixed, Technical
+Cohesion: 0.40
+Nodes (4): [0.0.0-beta.1] - 2026-08-31, Added, Common Toolkit (1.21.1) — Registro de cambios, Technical
 
 ### Community 75 - "Type"
 Cohesion: 0.40
@@ -395,24 +413,24 @@ Cohesion: 0.83
 Nodes (3): gradlew script, die(), warn()
 
 ## Knowledge Gaps
-- **92 isolated node(s):** `CLIENT`, `SERVER`, `CLIENT_AND_SERVER`, `ConfigFlags`, `COMMON` (+87 more)
+- **91 isolated node(s):** `CLIENT`, `SERVER`, `CLIENT_AND_SERVER`, `ConfigFlags`, `COMMON` (+86 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **9 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **7 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `DynamicRegistry` connect `DynamicRegistry` to `DynamicHolderSet`, `GearSet`, `DataGenPopulator`, `RegistrySerializer`, `DataGenBuilder.java`, `ResourceLocation`, `MixRegistry`, `DynamicRegistry.java`, `DynamicTagProvider.java`, `LockedSlot.java`, `DynamicHolder`, `.getId`, `DynamicTagKey`, `TagLoader.java`?**
-  _High betweenness centrality (0.156) - this node is a cross-community bridge._
+- **Why does `DynamicRegistry` connect `DynamicRegistry` to `DynamicHolderSet`, `DynRegPayloads.java`, `GearSet`, `DataGenPopulator`, `RegistrySerializer`, `DataGenBuilder.java`, `ResourceLocation`, `MixRegistry`, `DynamicRegistry.java`, `DynamicTagProvider.java`, `DynamicHolder`, `.getId`, `DynamicTagKey`, `TagLoader.java`?**
+  _High betweenness centrality (0.157) - this node is a cross-community bridge._
 - **Why does `Configuration` connect `Configuration` to `ConfigCategory`, `RegisterFieldOrderingsEvent`, `Property`, `Offset.java`?**
-  _High betweenness centrality (0.148) - this node is a cross-community bridge._
+  _High betweenness centrality (0.150) - this node is a cross-community bridge._
 - **Why does `ConfigCategory` connect `ConfigCategory` to `ConfigElement`, `Configuration`, `Property`, `Type`?**
-  _High betweenness centrality (0.103) - this node is a cross-community bridge._
+  _High betweenness centrality (0.104) - this node is a cross-community bridge._
 - **What connects `CLIENT`, `SERVER`, `CLIENT_AND_SERVER` to the rest of the system?**
-  _92 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _91 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Override` be split into smaller, more focused modules?**
   _Cohesion score 0.05582603050957481 - nodes in this community are weakly interconnected._
+- **Should `DynRegPayloads.java` be split into smaller, more focused modules?**
+  _Cohesion score 0.07553143374038897 - nodes in this community are weakly interconnected._
 - **Should `GearSet` be split into smaller, more focused modules?**
   _Cohesion score 0.062310949788263764 - nodes in this community are weakly interconnected._
-- **Should `PayloadProvider` be split into smaller, more focused modules?**
-  _Cohesion score 0.10227272727272728 - nodes in this community are weakly interconnected._

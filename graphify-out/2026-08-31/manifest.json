@@ -1,7 +1,7 @@
 {
   "build.gradle": {
-    "mtime": 1788191299.0605552,
-    "ast_hash": "770f862ac3bab4d67f2df2bbb00bb70b",
+    "mtime": 1788177742.6303482,
+    "ast_hash": "77e11d342f7228b0d6a5231cf22ae471",
     "semantic_hash": ""
   },
   "gradlew": {
@@ -330,8 +330,8 @@
     "semantic_hash": ""
   },
   "src/main/java/com/skd/commontoolkit/mixin/DatagenModLoaderMixin.java": {
-    "mtime": 1788200315.2338607,
-    "ast_hash": "1d91d982604cc38a73e1cb67fd756ba5",
+    "mtime": 1788176003.0788355,
+    "ast_hash": "3737a3299ca8b4c9368446b46dba87a4",
     "semantic_hash": ""
   },
   "src/main/java/com/skd/commontoolkit/mixin/HashCacheMixin.java": {
@@ -560,8 +560,8 @@
     "semantic_hash": ""
   },
   "CHANGELOG.md": {
-    "mtime": 1788208229.646537,
-    "ast_hash": "5d5cad9d16570f2130eb5f714abe9e53",
+    "mtime": 1788179604.8669024,
+    "ast_hash": "2f32b9936b1e302a452610073ec50a0b",
     "semantic_hash": ""
   },
   "NOTICE.md": {
@@ -570,8 +570,8 @@
     "semantic_hash": ""
   },
   "README.md": {
-    "mtime": 1788191383.1072493,
-    "ast_hash": "3fd9e3165635653db9ea601ea972e054",
+    "mtime": 1788179622.3192391,
+    "ast_hash": "4df223845a1fbc1d9a5c5d970c82d553",
     "semantic_hash": ""
   },
   "docs/PORT_BRIEF_1.21.1.md": {
@@ -590,13 +590,13 @@
     "semantic_hash": ""
   },
   "docs/curseforge/project_description.md": {
-    "mtime": 1788191358.2784498,
-    "ast_hash": "bd379c44511b1162917593e5816936a7",
+    "mtime": 1788179549.3189428,
+    "ast_hash": "ae42dae588d9c2c4683fb8521e709227",
     "semantic_hash": ""
   },
   "docs/curseforge/project_vars.md": {
-    "mtime": 1788208225.776762,
-    "ast_hash": "567365d50f5f798b549c9eed6ab8f521",
+    "mtime": 1788179507.3992407,
+    "ast_hash": "6a29ae82338497bfa6b88aa461acbd90",
     "semantic_hash": ""
   },
   "docs/curseforge/versions/0.0.0-beta.1.md": {
@@ -607,11 +607,6 @@
   "src/main/resources/assets/common_toolkit/icon.png": {
     "mtime": 1788173272.723148,
     "ast_hash": "71c7f21b35c9a1a573f2df6335791e5d",
-    "semantic_hash": ""
-  },
-  "docs/curseforge/versions/0.0.0-beta.2.md": {
-    "mtime": 1788208232.7762437,
-    "ast_hash": "25c20061abc3a47ae2d9f7bf20248ec6",
     "semantic_hash": ""
   }
 }

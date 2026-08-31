@@ -1,13 +1,14 @@
 # Common Toolkit
 
-A library mod for NeoForge (MC 26.2) providing shared developer utilities for other mods: configuration, networking helpers, dynamic JSON-driven registries with client sync, weighted gear/brewing-mix registries, creative tab filling, color/codec helpers, and related infrastructure.
+A library mod for NeoForge (MC 1.21.1) providing shared developer utilities for other mods: configuration, networking helpers, dynamic JSON-driven registries with client sync, weighted gear/brewing-mix registries, creative tab filling, color/codec helpers, and related infrastructure.
 
-This is a from-scratch **rewrite/port** of [Placebo](https://www.curseforge.com/minecraft/mc-mods/placebo) by Shadows_of_Fire (MIT License), retargeted to Minecraft 26.2 under a new mod id, package, and API surface — it is not a drop-in replacement and mods depending on the original Placebo API will not work against it. The Patreon-gated cosmetic system present in the original (wings/trails perks) was intentionally removed; it was tied to the original author's Patreon and has no place in an independently branded mod.
+This is a from-scratch **rewrite/port** of [Placebo](https://www.curseforge.com/minecraft/mc-mods/placebo) by Shadows_of_Fire (MIT License), under a new mod id, package, and API surface. This `1.21.1` branch is a **re-fork from the upstream Placebo 1.21.1 sources** (Placebo 9.9.2, NeoForge 21.1.187), re-applying the Common Toolkit identity and the 26.2 line's feature additions on top of the 1.21.1 API — it is not a drop-in replacement and mods depending on the original Placebo API will not work against it. The Patreon-gated cosmetic system present in the original (wings/trails perks) was intentionally removed; it was tied to the original author's Patreon and has no place in an independently branded mod.
 
 ## Features
 
 - **Configuration**: Declarative common/client/server config with an in-game config screen.
 - **Dynamic Registries**: JSON-driven, datapack-reloadable registries with automatic client sync over the network (weighted and unweighted variants).
+- **Dynamic Tags**: `#namespace:tag` references for the dynamic registries, resolved after content load and synced to the client.
 - **Networking Helper**: Simplified payload registration/handling on top of the NeoForge networking API.
 - **Gear Sets & Brewing Mixes**: Weighted, JSON-configurable registries for equipment sets and custom brewing recipes, ready for other mods to plug into.
 - **Creative Tab Filling**: Declarative registry to inject items into existing creative tabs without event-handler boilerplate.
@@ -16,7 +17,9 @@ This is a from-scratch **rewrite/port** of [Placebo](https://www.curseforge.com/
 
 ## Requirements
 
-- NeoForge 26.2.0.32-beta+ (client and server)
+- Minecraft 1.21.1
+- NeoForge 21.1.249+ (client and server)
+- Java 21+
 
 ## Build
 
@@ -24,7 +27,9 @@ This is a from-scratch **rewrite/port** of [Placebo](https://www.curseforge.com/
 gradlew build
 ```
 
-The jar will be generated at `build/libs/common_toolkit-<minecraft_version>-neoforge-<version>.jar`.
+The jar will be generated at `build/libs/common_toolkit-1.21.1-neoforge-21.1.249-<version>.jar`.
+
+See [docs/PORT_REPORT_1.21.1.md](docs/PORT_REPORT_1.21.1.md) for the port details.
 
 ## Credits
 

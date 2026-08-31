@@ -12,13 +12,13 @@
 | Mod ID (`gradle.properties`) | `common_toolkit` |
 | Clase principal | `CommonToolkit` |
 | Display name (Title Case) | `Common Toolkit` |
-| Versiones de Minecraft | `26.2` (única) |
-| Rama | `minecraft/26.2/neoforge-26.2.0.57/production` |
+| Versiones de Minecraft | `1.21.1` |
+| Rama | `minecraft/1.21.1/neoforge-21.1.249/production` |
 | Repo | `https://gitlab.com/stalking-dragons/minecraft/common-toolkit.git` |
 
 ## Origen del mod
 
-Common Toolkit es un **port reescrito** de [Placebo](https://www.curseforge.com/minecraft/mc-mods/placebo) (Shadows_of_Fire, MIT License), librería para MC 26.1.2 (versión de origen: `Placebo-26.1.2-10.0.2.jar`). Es un port completo: mismo propósito (librería de utilidades para otros mods — config, red, registro dinámico, partículas JSON, gear/mixes, etc.), pero con **mod id, paquete Java, clase principal y assets completamente distintos** al original. No debe quedar ninguna referencia a `placebo` ni a `dev.shadowsoffire` en el código o assets — solo el crédito explícito en README/NOTICE por ser MIT.
+Common Toolkit es un **port reescrito** de [Placebo](https://www.curseforge.com/minecraft/mc-mods/placebo) (Shadows_of_Fire, MIT License). Esta rama `1.21.1` es un **re-fork desde el Placebo original para NeoForge 1.21.1** (`Placebo-1.21` — Placebo 9.9.2, NeoForge 21.1.187), reaplicando la identidad de Common Toolkit y las adiciones propias del fork 26.2 (sistema de tags dinámicos, serializers, etc.) sobre la API 1.21.1 — **no** es un back-port del código 26.2. La rama 26.2 se usó solo como referencia de "qué añadir". Es un port completo: mismo propósito (librería de utilidades para otros mods — config, red, registro dinámico, gear/mixes, etc.), pero con **mod id, paquete Java, clase principal y assets completamente distintos** al original. No debe quedar ninguna referencia a `placebo` ni a `dev.shadowsoffire` en el código o assets — solo el crédito explícito en README/NOTICE por ser MIT. Detalle del port: `docs/PORT_REPORT_1.21.1.md`.
 
 ## Convenciones de nomenclatura
 
@@ -34,7 +34,7 @@ Paquete base: `com.skd.commontoolkit` (equivalente Java del mod id, sin guiones 
 ## Organización y ramas
 
 - Un repo GitLab por mod, una rama `minecraft/<mc>/neoforge-<neo>/production` por versión. Este clon local trabaja en la rama `production` de esta versión.
-- Carpetas: `<mod_id>/<framework>/<mc-version>/` — este clon vive en `common_toolkit/neoforge/26.2/`.
+- Carpetas: `<mod_id>/<framework>/<mc-version>/` — este clon vive en `common_toolkit/neoforge/1.21.1/`.
 - `*/main` y CI/CD: setup único al crear el repo (`codex-docs/reference/REPO_SETUP.md`) — no releer ni modificar salvo que haga falta configurarlo por primera vez.
 
 ## Estructura del proyecto
@@ -59,7 +59,7 @@ Cada subida a CurseForge crea tag: beta `<mc>-neoforge-beta.X` · release `<mc>-
 **1. Desarrollo**
 
 ```bash
-git checkout minecraft/26.2/neoforge-26.2.0.57/production
+git checkout minecraft/1.21.1/neoforge-21.1.249/production
 ./gradlew.bat build
 git add -A
 git commit -m "feat: <descripción>

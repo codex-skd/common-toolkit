@@ -4,8 +4,9 @@
 
 <p align="center">
 <img src="https://img.shields.io/badge/loader-NeoForge-orange?style=plastic&logo=curseforge" alt="NeoForge">
-<img src="https://img.shields.io/badge/minecraft-1.21.1%20%7C%2026.2-blue?style=plastic" alt="Minecraft 1.21.1 and 26.2">
+<img src="https://img.shields.io/badge/minecraft-26.2%20%7C%201.21.1-blue?style=plastic" alt="Minecraft 26.2 and 1.21.1">
 <img src="https://img.shields.io/badge/type-library-brightgreen?style=plastic" alt="Library">
+<img src="https://img.shields.io/badge/license-LGPL--2.1-lightgrey?style=plastic" alt="LGPL-2.1-or-later">
 </p>
 
 <br>
@@ -79,9 +80,7 @@
 <h2>&#128196; Requirements</h2>
 
 <table>
-<tr><td><strong>Minecraft</strong></td><td>1.21.1</td></tr>
-<tr><td><strong>NeoForge</strong></td><td>21.1.249+</td></tr>
-<tr><td><strong>Java</strong></td><td>21+</td></tr>
+<tr><td><strong>Minecraft / NeoForge / Java</strong></td><td>see <em>Available Versions</em> below</td></tr>
 <tr><td><strong>Side</strong></td><td>Client and Server (required on both)</td></tr>
 </table>
 
@@ -91,8 +90,8 @@
 
 <table>
 <tr><th align="left">Minecraft</th><th align="left">NeoForge</th><th align="left">Java</th><th align="left">Latest build</th><th align="left">Status</th></tr>
-<tr><td>1.21.1</td><td>21.1.249+</td><td>21</td><td><code>0.0.0-beta.1</code></td><td>Beta &mdash; re-fork port from upstream Placebo 1.21.1</td></tr>
 <tr><td>26.2</td><td>26.2.0.32-beta+</td><td>25</td><td><code>1.1.0</code></td><td>Stable</td></tr>
+<tr><td>1.21.1</td><td>21.1.249+</td><td>21</td><td><code>0.0.0-beta.1</code></td><td>Beta &mdash; re-fork port from upstream Placebo 1.21.1</td></tr>
 </table>
 
 <p><em>Both versions share this CurseForge project. Pick the file that matches your Minecraft version &mdash; the API surface is the same across both, only the underlying platform differs.</em></p>
@@ -112,9 +111,11 @@
 
 <br>
 
-<h2>&#128591; Credits</h2>
+<h2>&#128591; Credits &amp; License</h2>
 
-<p>Common Toolkit is a rewritten, independently branded port of <a href="https://www.curseforge.com/minecraft/mc-mods/placebo">Placebo</a> by <strong>Shadows_of_Fire</strong> (MIT License), under a new mod id, package and API. The <code>1.21.1</code> build is a re-fork from the upstream Placebo 1.21.1 sources; the <code>26.2</code> build targets the current NeoForge line. The original Patreon-gated cosmetic system was not ported. See the repository's <code>NOTICE.md</code> for full attribution, including an embedded LGPL-2.1 portion originally from Minecraft Forge's configuration system.</p>
+<p>Common Toolkit is a rewritten, independently branded port of <a href="https://www.curseforge.com/minecraft/mc-mods/placebo">Placebo</a> by <strong>Shadows_of_Fire</strong> (MIT License), under a new mod id, package and API. The <code>26.2</code> build targets the current NeoForge line; the <code>1.21.1</code> build is a re-fork from the upstream Placebo 1.21.1 sources. The original Patreon-gated cosmetic system was not ported.</p>
+
+<p><strong>License:</strong> this mod is distributed under the <strong>GNU LGPL v2.1 or later</strong>, because its configuration system (<code>com.skd.commontoolkit.config</code>) is derived from Minecraft Forge's LGPL-2.1 legacy config code. The remaining, Placebo-derived portions are additionally available under the <strong>MIT License</strong>. Full third-party attribution, the MIT text and the LGPL-2.1 notice are in the repository's <code>NOTICE.md</code>; the complete LGPL-2.1 text ships as <code>COPYING.LESSER</code> in the jar and repo, and the mod's own source is published as a <code>-sources.jar</code> alongside every release.</p>
 
 <p>Developed by <strong>Stalking Dragons</strong>.</p>
 

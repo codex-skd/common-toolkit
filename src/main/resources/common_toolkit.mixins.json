@@ -1,0 +1,16 @@
+{
+    "required": true,
+    "package": "com.skd.commontoolkit.mixin",
+    "compatibilityLevel": "JAVA_21",
+    "mixins": [
+        "AnvilBlockMixin",
+        "DataProviderMixin",
+        "HashCacheMixin",
+        "ItemStackMixin"
+    ],
+    "client": [
+        "client.AbstractContainerScreenMixin",
+        "client.ChatComponentMixin"
+    ],
+    "minVersion": "0.8"
+}

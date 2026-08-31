@@ -1,54 +1,53 @@
 package com.skd.commontoolkit.dynreg;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Consumer;
 
 import javax.annotation.Nullable;
 
-import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.MustBeInvokedByOverriders;
+import org.slf4j.Logger;
 
-import com.google.common.base.Preconditions;
 import com.google.common.collect.BiMap;
-import com.google.common.collect.HashBiMap;
 import com.google.common.collect.ImmutableBiMap;
 import com.google.common.collect.Maps;
-import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonParseException;
+import com.google.gson.JsonParser;
 import com.mojang.datafixers.util.Either;
 import com.mojang.serialization.Codec;
 
-import com.skd.commontoolkit.CommonToolkit;
-import com.skd.commontoolkit.codec.CodecMap;
-import com.skd.commontoolkit.codec.CodecProvider;
+import com.skd.commontoolkit.dynreg.tag.DynamicHolderSet;
+import com.skd.commontoolkit.dynreg.tag.DynamicTagKey;
+import com.skd.commontoolkit.dynreg.tag.DynamicTagManager;
 import com.skd.commontoolkit.json.JsonUtil;
 import io.netty.buffer.ByteBuf;
 import io.netty.handler.codec.CodecException;
-import net.minecraft.network.RegistryFriendlyByteBuf;
-import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
+import net.minecraft.resources.FileToIdConverter;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.ReloadableServerResources;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.server.packs.resources.Resource;
 import net.minecraft.server.packs.resources.ResourceManager;
-import net.minecraft.server.packs.resources.SimpleJsonResourceReloadListener;
+import net.minecraft.server.packs.resources.SimplePreparableReloadListener;
 import net.minecraft.util.profiling.ProfilerFiller;
-import net.neoforged.fml.LogicalSide;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.common.conditions.ConditionalOps;
 import net.neoforged.neoforge.event.AddReloadListenerEvent;
 import net.neoforged.neoforge.event.OnDatapackSyncEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
-import net.neoforged.neoforge.server.ServerLifecycleHooks;
 
 /**
  * A Dynamic Registry is a reload listener which acts like a registry. Unlike datapack registries, it can reload.
@@ -56,35 +55,57 @@ import net.neoforged.neoforge.server.ServerLifecycleHooks;
  * To utilize this class, subclass it, and provide the appropriate constructor parameters.<br>
  * Then, create a single static instance of it and keep it around.
  * <p>
- * You will provide your serializers via {@link #registerBuiltinCodecs()}.<br>
- * You will then need to register it via {@link #registerToBus()}.<br>
+ * The de/serialization strategy (codec, sync, subtype dispatch) is supplied as a {@link RegistrySerializer}.
+ * Once constructed, registration to the event bus is performed via {@link #registerToBus()}.
  * From then on, loading of files, condition checks, network sync, and everything else is automatically handled.
  *
  * @param <R> The base type of objects stored in this registry.
  */
-// TODO: Drop the CodecProvider requirement from this class and bind it to a subclass. Objects without subtypes do not need CodecProvider.
-public abstract class DynamicRegistry<R extends CodecProvider<? super R>> extends SimpleJsonResourceReloadListener {
+public abstract class DynamicRegistry<R> extends SimplePreparableReloadListener<Map<ResourceLocation, JsonElement>> {
+
+    /**
+     * Global registry of all {@link DynamicRegistry} instances, keyed by their {@link #getId() id}.
+     * <p>
+     * Populated automatically during construction. Used by the tag manager to enumerate registries that need their
+     * tag content loaded.
+     */
+    private static final Map<ResourceLocation, DynamicRegistry<?>> ALL_REGISTRIES = new ConcurrentHashMap<>();
+
+    private static boolean tagManagerRegistered = false;
 
     protected final Logger logger;
-    protected final String path;
-    protected final boolean synced;
-    protected final boolean subtypes;
-    protected final CodecMap<R> codecs;
+    protected final ResourceLocation id;
+    protected final RegistrySerializer<R> serializer;
     protected final Codec<DynamicHolder<R>> holderCodec;
+
+    @Nullable
     protected final StreamCodec<ByteBuf, DynamicHolder<R>> holderStreamCodec;
-    protected final BiMap<ResourceLocation, StreamCodec<RegistryFriendlyByteBuf, ? extends R>> streamCodecs;
+
+    /**
+     * Interned tag set instances, keyed by tag id. Created lazily by {@link #getOrCreateTag(DynamicTagKey)} the first
+     * time a codec or consumer references the tag. Bound during tag-manager apply, unbound during tag-manager begin.
+     * <p>
+     * Concurrent because codec decoding may run on prepare-phase threads while tag-manager apply runs on the main
+     * thread.
+     */
+    private final Map<ResourceLocation, DynamicHolderSet.Named<R>> tags = new ConcurrentHashMap<>();
 
     /**
      * Internal registry. Immutable when outside of the registration phase.
      * <p>
-     * This map is cleared in {@link #beginReload()} and frozen in {@link #onReload()}
+     * This map is cleared in {@link #beginReload(ReloadType)} and frozen in {@link #onReload(ReloadType)}.
      */
     protected BiMap<ResourceLocation, R> registry = ImmutableBiMap.of();
 
     /**
      * Staged data used during the sync process. Discarded when running an integrated server.
      */
-    private final Map<ResourceLocation, R> staged = new HashMap<>();
+    final Map<ResourceLocation, R> staged = new HashMap<>();
+
+    /**
+     * Staged tag data used during the sync process. Discarded when running an integrated server.
+     */
+    final Map<ResourceLocation, List<ResourceLocation>> stagedTags = new HashMap<>();
 
     /**
      * Map of all holders that have ever been requested for this registry.
@@ -102,26 +123,45 @@ public abstract class DynamicRegistry<R extends CodecProvider<? super R>> extend
     /**
      * Constructs a new dynamic registry.
      *
-     * @param logger   The logger used by this listener for all relevant messages.
-     * @param path     The datapack path used by this listener for loading files.
-     * @param synced   If this listener will be synced over the network.
-     * @param subtypes If this listener supports subtyped objects (and the "type" key on top-level objects).
+     * @param logger     The logger used by this listener for all relevant messages.
+     * @param id         The namespaced id of this registry. Used for the data directory layout
+     *                   ({@code data/<datapack-ns>/<id.namespace>/<id.path>/}), the tag directory
+     *                   ({@code data/<datapack-ns>/tags/<id.namespace>/<id.path>/}), the reload-listener id,
+     *                   and the network sync key.
+     * @param serializer The serialization strategy for entries of this registry.
      * @apiNote After construction, {@link #registerToBus()} must be called during setup.
      */
-    public DynamicRegistry(Logger logger, String path, boolean synced, boolean subtypes) {
-        super(new GsonBuilder().setLenient().create(), path);
+    public DynamicRegistry(Logger logger, ResourceLocation id, RegistrySerializer<R> serializer) {
         this.logger = logger;
-        this.path = path;
-        this.synced = synced;
-        this.subtypes = subtypes;
-        this.codecs = new CodecMap<>(path);
-        this.streamCodecs = HashBiMap.create();
-        this.registerBuiltinCodecs();
-        if (this.codecs.isEmpty()) {
-            throw new RuntimeException("Attempted to create a dynamic registry for " + path + " with no built-in codecs!");
-        }
+        this.id = id;
+        this.serializer = serializer;
         this.holderCodec = ResourceLocation.CODEC.xmap(this::holder, DynamicHolder::getId);
-        this.holderStreamCodec = ResourceLocation.STREAM_CODEC.map(this::holder, DynamicHolder::getId);
+        this.holderStreamCodec = serializer.isSynced() ? ResourceLocation.STREAM_CODEC.map(this::holder, DynamicHolder::getId) : null;
+        if (ALL_REGISTRIES.putIfAbsent(id, this) != null) {
+            throw new IllegalStateException("Attempted to construct two DynamicRegistry instances with the same id: " + id);
+        }
+    }
+
+    /**
+     * Walks the datapack and parses raw JSON files from {@code data/<ns>/<id.namespace>/<id.path>/}, returning a map of
+     * resource id → parsed JSON. Codec-based decoding is deferred to {@link #apply}.
+     */
+    @Override
+    protected Map<ResourceLocation, JsonElement> prepare(ResourceManager manager, ProfilerFiller profiler) {
+        Map<ResourceLocation, JsonElement> result = new HashMap<>();
+        FileToIdConverter lister = FileToIdConverter.json(this.id.getNamespace() + "/" + this.id.getPath());
+        for (Map.Entry<ResourceLocation, Resource> entry : lister.listMatchingResources(manager).entrySet()) {
+            ResourceLocation location = entry.getKey();
+            ResourceLocation entryId = lister.fileToId(location);
+            try (var reader = entry.getValue().openAsReader()) {
+                JsonElement json = JsonParser.parseReader(reader);
+                result.put(entryId, json);
+            }
+            catch (JsonParseException | java.io.IOException e) {
+                this.logger.error("Couldn't parse data file '{}' from '{}': {}", entryId, location, e);
+            }
+        }
+        return result;
     }
 
     /**
@@ -129,27 +169,28 @@ public abstract class DynamicRegistry<R extends CodecProvider<? super R>> extend
      * <ol>
      * <li>Empty JSON check: Empty values are discarded with a warning message.</li>
      * <li>Condition check: Values that are conditionally disabled are ignored. A note is logged at the trace level.</li>
-     * <li>Deserialization: The serializer is pulled from the 'type' field if subtypes is enabled, or the default serializer is used.</li>
+     * <li>Deserialization: Performed by {@link RegistrySerializer#codec()}.</li>
      * <li>Validation: Certain states of the object are checked for sanity.</li>
      * <li>Registration: The item is added to the {@link #registry}.</li>
      * </ol>
+     * This parsing step has to happen on the main thread because dynamic registries may have dependencies on other dynamic registries, which will not be respected
+     * when deserializing in prepare().
      */
     @Override
     protected final void apply(Map<ResourceLocation, JsonElement> objects, ResourceManager pResourceManager, ProfilerFiller pProfiler) {
         this.beginReload(ReloadType.SERVER);
         ConditionalOps<JsonElement> ops = this.makeConditionalOps();
+        Codec<R> codec = this.serializer.codec();
         objects.forEach((key, ele) -> {
             try {
-                if (JsonUtil.checkAndLogEmpty(ele, key, this.path, this.logger) && JsonUtil.checkConditions(ele, key, this.path, this.logger, ops)) {
+                if (JsonUtil.checkAndLogEmpty(ele, key, this.id, this.logger) && JsonUtil.checkConditions(ele, key, this.id, this.logger, ops)) {
                     JsonObject obj = ele.getAsJsonObject();
-                    R deserialized = this.codecs.decode(ops, obj).getOrThrow(this::makeCodecException).getFirst();
-                    Preconditions.checkNotNull(deserialized.getCodec(), "A " + this.path + " with id " + key + " is not declaring a codec.");
-                    Preconditions.checkNotNull(this.codecs.getKey(deserialized.getCodec()), "A " + this.path + " with id " + key + " is declaring an unregistered codec.");
+                    R deserialized = codec.decode(ops, obj).getOrThrow(this::makeCodecException).getFirst();
                     this.register(key, deserialized);
                 }
             }
             catch (Exception e) {
-                this.logger.error("Failed parsing {} file {}.", this.path, key);
+                this.logger.error("Failed parsing {} file {}.", this.id, key);
                 this.logger.error("Underlying Exception: ", e);
             }
         });
@@ -157,50 +198,31 @@ public abstract class DynamicRegistry<R extends CodecProvider<? super R>> extend
     }
 
     /**
-     * Add all default serializers to this reload listener.
-     * This should be a series of calls to {@link #registerCodec(ResourceLocation, Codec)}
-     */
-    protected abstract void registerBuiltinCodecs();
-
-    /**
      * Called when this manager begins reloading all items.
      * Should handle clearing internal data caches.
-     * 
+     *
      * @see {@link ReloadType} for information on the reload types.
      */
     @MustBeInvokedByOverriders
     protected void beginReload(ReloadType type) {
-        this.beginReload();
-    }
-
-    /**
-     * @deprecated Use {@link #beginReload(LogicalSide)} instead.
-     */
-    @Deprecated(forRemoval = true, since = "9.9.0")
-    protected void beginReload() {
         this.callbacks.forEach(l -> l.beginReload(this));
         this.registry = new DynRegBiMap<>();
         this.holders.values().forEach(DynamicHolder::unbind);
+        if (type != ReloadType.INTEGRATED_CLIENT) {
+            this.tags.values().forEach(DynamicHolderSet.Named::unbind);
+        }
     }
 
     /**
      * Called after this manager has finished reloading all items.
      * Should handle any info logging, and data immutability.
-     * 
+     *
      * @see {@link ReloadType} for information on the reload types.
      */
     @MustBeInvokedByOverriders
     protected void onReload(ReloadType type) {
-        this.onReload();
-    }
-
-    /**
-     * @deprecated Use {@link #onReload(LogicalSide)} instead.
-     */
-    @Deprecated(forRemoval = true, since = "9.9.0")
-    protected void onReload() {
         this.registry = Maps.unmodifiableBiMap(this.registry);
-        this.logger.info("Registered {} {}.", this.registry.size(), this.path);
+        this.logger.info("Registered {} {}.", this.registry.size(), this.id);
         this.callbacks.forEach(l -> l.onReload(this));
         this.holders.values().forEach(DynamicHolder::bind);
     }
@@ -247,7 +269,9 @@ public abstract class DynamicRegistry<R extends CodecProvider<? super R>> extend
      * This should be called for ALL listeners from common setup.
      */
     public void registerToBus() {
-        if (this.synced) SyncManagement.registerForSync(this);
+        if (this.serializer.isSynced()) {
+            SyncManagement.registerForSync(this);
+        }
         NeoForge.EVENT_BUS.addListener(this::addReloader);
     }
 
@@ -303,59 +327,10 @@ public abstract class DynamicRegistry<R extends CodecProvider<? super R>> extend
      * @throws UnsupportedOperationException if this is not a synced registry.
      */
     public StreamCodec<ByteBuf, DynamicHolder<R>> holderStreamCodec() {
-        if (!this.synced) {
-            throw new UnsupportedOperationException("Cannot retrieve a stream codec for the non-synced DynamicRegistry: " + this.path);
+        if (this.holderStreamCodec == null) {
+            throw new UnsupportedOperationException("Cannot retrieve a stream codec for the non-synced DynamicRegistry: " + this.id);
         }
         return this.holderStreamCodec;
-    }
-
-    /**
-     * Registers a codec to this registry. Does not permit duplicates, and does not permit multiple registration. Not valid for registries that do not support
-     * subtypes.
-     *
-     * @param key         The key of the codec.
-     * @param codec       The codec being registered.
-     * @param streamCodec A stream codec for synced registries.
-     * @throws UnsupportedOperationException if this registry does not support subtypes. Use {@link #registerDefaultCodec(ResourceLocation, Codec)} instead.
-     */
-    public final void registerCodec(ResourceLocation key, Codec<? extends R> codec, StreamCodec<RegistryFriendlyByteBuf, ? extends R> streamCodec) {
-        if (!this.subtypes) {
-            throw new UnsupportedOperationException("Attempted to call registerCodec on a registry which does not support subtypes.");
-        }
-        this.registerInternal(key, codec, streamCodec);
-    }
-
-    /**
-     * Variant of {@link #registerCodec(ResourceLocation, Codec, StreamCodec)} that automatically wraps the codec as a stream codec.
-     * <p>
-     * If this registry is synced, prefer providing a stream codec via the other overload.
-     */
-    public final void registerCodec(ResourceLocation key, Codec<? extends R> codec) {
-        registerCodec(key, codec, ByteBufCodecs.fromCodecWithRegistries(codec));
-    }
-
-    /**
-     * Registers a default codec for this registry. Only one default codec can be registered, and it cannot be changed.
-     *
-     * @param key   The key of the codec.
-     * @param codec The codec being registered.
-     * @throws UnsupportedOperationException if a default codec has already been registered.
-     */
-    protected final void registerDefaultCodec(ResourceLocation key, Codec<? extends R> codec, StreamCodec<RegistryFriendlyByteBuf, ? extends R> streamCodec) {
-        if (this.codecs.getDefaultCodec() != null) {
-            throw new UnsupportedOperationException("Attempted to register a second " + this.path + " default codec with key " + key);
-        }
-        this.registerInternal(key, codec, streamCodec);
-        this.codecs.setDefaultCodec(codec);
-    }
-
-    /**
-     * Variant of {@link #registerDefaultCodec(ResourceLocation, Codec, StreamCodec)} that automatically wraps the codec as a stream codec.
-     * <p>
-     * If this registry is synced, prefer providing a stream codec via the other overload.
-     */
-    protected final void registerDefaultCodec(ResourceLocation key, Codec<? extends R> codec) {
-        registerDefaultCodec(key, codec, ByteBufCodecs.fromCodecWithRegistries(codec));
     }
 
     /**
@@ -374,31 +349,82 @@ public abstract class DynamicRegistry<R extends CodecProvider<? super R>> extend
     }
 
     /**
-     * Returns the path used by this registry.
+     * @return The namespaced id of this registry.
      */
-    public final String getPath() {
-        return this.path;
+    public final ResourceLocation getId() {
+        return this.id;
+    }
+
+    /**
+     * Returns the serializer used by this registry.
+     */
+    public final RegistrySerializer<R> getSerializer() {
+        return this.serializer;
+    }
+
+    /**
+     * Returns the logger used by this registry. Exposed for tag-loading and similar machinery in adjacent packages.
+     */
+    public final Logger getLogger() {
+        return this.logger;
     }
 
     /**
      * Returns the direct element codec, which can be used for de/serializing an element known by this registry.
      */
     public final Codec<R> elementCodec() {
-        return this.codecs;
+        return this.serializer.codec();
     }
 
     /**
-     * Validates that every created {@link DynamicHolder} is bound to a regsitry entry.
+     * Returns the interned {@link DynamicHolderSet.Named} for the given tag key, creating it lazily if it does not
+     * yet exist.
+     * <p>
+     * The returned set may be unbound (empty contents, {@link DynamicHolderSet.Named#isBound()} returns false) until
+     * the tag manager binds tags during a reload. Codecs that decode tag references should call this method, which
+     * gives them a stable {@link DynamicHolderSet.Named} reference that becomes populated when tags load.
+     */
+    public final DynamicHolderSet.Named<R> getOrCreateTag(DynamicTagKey<R> key) {
+        return this.tags.computeIfAbsent(key.id(), id -> new DynamicHolderSet.Named<>(this, key));
+    }
+
+    /**
+     * @return The bound holder set for the given tag, or empty if no tag with that id is currently bound. Unbound
+     *         interned tag sets are treated as absent.
+     */
+    public final Optional<DynamicHolderSet.Named<R>> getTag(DynamicTagKey<R> key) {
+        DynamicHolderSet.Named<R> set = this.tags.get(key.id());
+        return set != null && set.isBound() ? Optional.of(set) : Optional.empty();
+    }
+
+    /**
+     * Replaces the entire tag set with the given resolved map. Called by the tag manager during reload apply.
+     * <p>
+     * Tags present in the previous reload but absent from {@code resolved} are left interned but unbound — any
+     * outstanding references continue to resolve, but are empty until the tag is re-declared.
+     */
+    @ApiStatus.Internal
+    public final void bindTags(Map<ResourceLocation, List<ResourceLocation>> resolved) {
+        for (Map.Entry<ResourceLocation, List<ResourceLocation>> entry : resolved.entrySet()) {
+            DynamicTagKey<R> tagKey = DynamicTagKey.create(this, entry.getKey());
+            DynamicHolderSet.Named<R> set = this.tags.computeIfAbsent(entry.getKey(), tagId -> new DynamicHolderSet.Named<>(this, tagKey));
+            List<DynamicHolder<R>> holders = entry.getValue().stream().map(this::holder).toList();
+            set.bind(holders);
+        }
+    }
+
+    /**
+     * Validates that every created {@link DynamicHolder} is bound to a registry entry.
      * <p>
      * This is primarily used as a sanity check in data generation.
-     * 
+     *
      * @throws RuntimeException if any unbound holders are detected.
      */
     public final void validateExistingHolders() {
         String error = "";
         for (DynamicHolder<R> holder : this.holders.values()) {
-            if (!holder.isBound()) {
-                error += "Failed to validate dynamic holder %s for registry %s\n".formatted(holder.getId(), this.getPath());
+            if (!holder.isBound() && holder != this.emptyHolder()) {
+                error += "Failed to validate dynamic holder %s for registry %s\n".formatted(holder.getId(), this.id);
             }
         }
         if (!error.isEmpty()) {
@@ -416,7 +442,9 @@ public abstract class DynamicRegistry<R extends CodecProvider<? super R>> extend
      * @throws UnsupportedOperationException if the key is already in use.
      */
     protected final void register(ResourceLocation key, R value) {
-        if (this.registry.containsKey(key)) throw new UnsupportedOperationException("Attempted to register a " + this.path + " with a duplicate registry ID! Key: " + key);
+        if (this.registry.containsKey(key)) {
+            throw new UnsupportedOperationException("Attempted to register a " + this.id + " with a duplicate registry ID! Key: " + key);
+        }
         this.validateItem(key, value);
         this.registry.put(key, value);
         this.holders.computeIfAbsent(key, k -> new DynamicHolder<>(this, k));
@@ -433,9 +461,16 @@ public abstract class DynamicRegistry<R extends CodecProvider<? super R>> extend
 
     /**
      * Adds this reload listener to the {@link ReloadableServerResources}.
+     * <p>
+     * Also registers the {@link DynamicTagManager} once (on first call) so that tag loading runs after registry
+     * content has been deserialized.
      */
     private void addReloader(AddReloadListenerEvent e) {
         e.addListener(this);
+        if (!tagManagerRegistered) {
+            tagManagerRegistered = true;
+            e.addListener(DynamicTagManager.INSTANCE);
+        }
     }
 
     /**
@@ -444,10 +479,11 @@ public abstract class DynamicRegistry<R extends CodecProvider<? super R>> extend
      *
      * @implNote Not executed when hosting a singleplayer world, as it would replace the server data.
      */
-    private void processDedicatedClientReload() {
+    void processDedicatedClientReload() {
         this.beginReload(ReloadType.DEDICATED_CLIENT);
         this.staged.forEach(this::register);
         this.onReload(ReloadType.DEDICATED_CLIENT);
+        this.bindTags(this.stagedTags);
     }
 
     /**
@@ -456,7 +492,7 @@ public abstract class DynamicRegistry<R extends CodecProvider<? super R>> extend
      *
      * @implNote This is used instead of {@link #processDedicatedClientReload()} for singleplayer hosts to avoid data loss.
      */
-    private void processIntegratedClientReload() {
+    void processIntegratedClientReload() {
         this.staged.clear();
         this.staged.putAll(this.registry);
         this.beginReload(ReloadType.INTEGRATED_CLIENT);
@@ -465,29 +501,55 @@ public abstract class DynamicRegistry<R extends CodecProvider<? super R>> extend
     }
 
     private CodecException makeCodecException(String msg) {
-        return new CodecException("Codec failure for type %s, message: %s".formatted(this.path, msg));
+        return new CodecException("Codec failure for type %s, message: %s".formatted(this.id, msg));
     }
 
     /**
-     * Sync event handler. Sends the start packet, a content packet for each item, and then the end packet.
+     * @return The currently-bound tag content, mapping tag id → list of entry ids. Used by the sync flow to ship
+     *         resolved tags to clients.
      */
-    private void sync(OnDatapackSyncEvent e) {
+    private Map<ResourceLocation, List<ResourceLocation>> exportTags() {
+        Map<ResourceLocation, List<ResourceLocation>> result = new HashMap<>();
+        for (DynamicHolderSet.Named<R> named : this.tags.values()) {
+            if (named.isBound()) {
+                result.put(named.key().id(), named.stream().map(DynamicHolder::getId).toList());
+            }
+        }
+        return result;
+    }
+
+    /**
+     * Sync event handler. Sends the start packet, a content packet for each item, a tag-sync packet
+     * (if any tags are bound), and then the end packet.
+     */
+    void sync(OnDatapackSyncEvent e) {
         ServerPlayer player = e.getPlayer();
         Consumer<CustomPacketPayload> target = player == null ? PacketDistributor::sendToAllPlayers : payload -> PacketDistributor.sendToPlayer(player, payload);
 
-        target.accept(new ReloadListenerPayloads.Start(this.path));
+        target.accept(new DynRegPayloads.Start(this.id));
         this.registry.forEach((k, v) -> {
-            target.accept(new ReloadListenerPayloads.Content<>(this.path, k, Either.left(v)));
+            target.accept(new DynRegPayloads.Content<>(this.id, k, Either.left(v)));
         });
-        target.accept(new ReloadListenerPayloads.End(this.path));
+        Map<ResourceLocation, List<ResourceLocation>> exported = this.exportTags();
+        if (!exported.isEmpty()) {
+            target.accept(new TagSyncPayload(this.id, exported));
+        }
+        target.accept(new DynRegPayloads.End(this.id));
     }
 
-    private void registerInternal(ResourceLocation key, Codec<? extends R> codec, StreamCodec<RegistryFriendlyByteBuf, ? extends R> streamCodec) {
-        Preconditions.checkNotNull(key);
-        Preconditions.checkNotNull(codec, "Attempted to register a null codec for key " + key);
-        Preconditions.checkNotNull(streamCodec, "Attempted to register a null stream codec for key " + key);
-        this.codecs.register(key, codec);
-        this.streamCodecs.put(key, streamCodec);
+    /**
+     * @return An unmodifiable view of every constructed {@link DynamicRegistry} keyed by id.
+     */
+    public static Map<ResourceLocation, DynamicRegistry<?>> allRegistries() {
+        return Collections.unmodifiableMap(ALL_REGISTRIES);
+    }
+
+    /**
+     * Looks up a registry by its {@link #getId() id}.
+     */
+    @Nullable
+    public static DynamicRegistry<?> byId(ResourceLocation id) {
+        return ALL_REGISTRIES.get(id);
     }
 
     /**
@@ -503,7 +565,7 @@ public abstract class DynamicRegistry<R extends CodecProvider<? super R>> extend
         /**
          * The reload is being performed on the client while playing on an integrated server.
          * In this case, the incoming objects are reused from the server, as the registry is a singleton.
-         * 
+         *
          * @apiNote If your objects are mutable, you should avoid re-applying any modifications already applied.
          */
         INTEGRATED_CLIENT,
@@ -516,125 +578,10 @@ public abstract class DynamicRegistry<R extends CodecProvider<? super R>> extend
     }
 
     /**
-     * Internal class for sync management.
-     */
-    @ApiStatus.Internal
-    static class SyncManagement {
-
-        private static final Map<String, DynamicRegistry<?>> SYNC_REGISTRY = new LinkedHashMap<>();
-
-        /**
-         * Registers a {@link DynamicRegistry} for syncing.
-         *
-         * @param listener The listener to register.
-         * @throws UnsupportedOperationException if the listener is not a synced listener.
-         * @throws UnsupportedOperationException if the listener is already registered to the sync registry.
-         */
-        static void registerForSync(DynamicRegistry<?> listener) {
-            if (!listener.synced) throw new UnsupportedOperationException("Attempted to register the non-synced JSON Reload Listener " + listener.path + " as a synced listener!");
-            synchronized (SYNC_REGISTRY) {
-                if (SYNC_REGISTRY.containsKey(listener.path)) throw new UnsupportedOperationException("Attempted to register the JSON Reload Listener for syncing " + listener.path + " but one already exists!");
-                if (SYNC_REGISTRY.isEmpty()) NeoForge.EVENT_BUS.addListener(SyncManagement::syncAll);
-                SYNC_REGISTRY.put(listener.path, listener);
-            }
-        }
-
-        /**
-         * Begins the sync for a specific listener.
-         *
-         * @param path The path of the listener being synced.
-         */
-        static void initSync(String path) {
-            ifPresent(path, registry -> registry.staged.clear());
-            CommonToolkit.LOGGER.info("Starting sync for {}", path);
-        }
-
-        /**
-         * Write an item (with the same type as the listener) to the network.
-         *
-         * @param <V>   The type of item being written.
-         * @param path  The path of the listener.
-         * @param value The value being written.
-         * @param buf   The buffer being written to.
-         */
-        @SuppressWarnings("unchecked")
-        static <V extends CodecProvider<? super V>> void writeItem(String path, V value, RegistryFriendlyByteBuf buf) {
-            ifPresent(path, registry -> {
-                ResourceLocation type = registry.codecs.getKey(value.getCodec());
-                buf.writeResourceLocation(type);
-                ((StreamCodec<RegistryFriendlyByteBuf, V>) registry.streamCodecs.get(type)).encode(buf, value);
-            });
-        }
-
-        /**
-         * Reads an item from the network, via the listener's codec.
-         *
-         * @param <V>  The type of item being read.
-         * @param path The path of the listener.
-         * @param buf  The buffer being read from.
-         * @return An object of type V as deserialized from the network.
-         */
-        @SuppressWarnings("unchecked")
-        static <V> V readItem(String path, RegistryFriendlyByteBuf buf) {
-            var registry = SYNC_REGISTRY.get(path);
-            if (registry == null) {
-                throw new RuntimeException("Received sync packet for unknown registry!");
-            }
-            ResourceLocation type = buf.readResourceLocation();
-            return ((StreamCodec<RegistryFriendlyByteBuf, V>) registry.streamCodecs.get(type)).decode(buf);
-        }
-
-        /**
-         * Stages an item to a listener.
-         *
-         * @param <V>   The type of the item being staged.
-         * @param path  The path of the listener.
-         * @param value The object being staged.
-         */
-        @SuppressWarnings("unchecked")
-        static <V> void acceptItem(String path, ResourceLocation key, V value) {
-            ifPresent(path, registry -> ((Map<ResourceLocation, V>) registry.staged).put(key, value));
-        }
-
-        /**
-         * Ends the sync for a specific listener.
-         * This will delete current data, push staged data to live, and call the appropriate methods for reloading.
-         *
-         * @param path The path of the listener.
-         * @implNote Only called on the logical client.
-         */
-        static void endSync(String path) {
-            if (ServerLifecycleHooks.getCurrentServer() != null) {
-                // On a singleplayer host, we have to re-register a copy of the original data instead of the synced data
-                // since the synced data may not contain the "full" information from the server.
-                ifPresent(path, DynamicRegistry::processIntegratedClientReload);
-            }
-            else {
-                ifPresent(path, DynamicRegistry::processDedicatedClientReload);
-            }
-            CommonToolkit.LOGGER.info("Completed sync for {}", path);
-        }
-
-        /**
-         * Executes an action if the specified path is present in the sync registry.
-         */
-        private static void ifPresent(String path, Consumer<DynamicRegistry<?>> consumer) {
-            DynamicRegistry<?> value = SYNC_REGISTRY.get(path);
-            if (value != null) {
-                consumer.accept(value);
-            }
-        }
-
-        private static void syncAll(OnDatapackSyncEvent e) {
-            SYNC_REGISTRY.values().forEach(r -> r.sync(e));
-        }
-    }
-
-    /**
      * Internal class to handle population of registry entries during data generation.
      */
     @ApiStatus.Internal
-    public static class DataGenPopulator<R extends CodecProvider<? super R>> {
+    public static class DataGenPopulator<R> {
 
         private final DynamicRegistry<R> registry;
 
@@ -644,7 +591,7 @@ public abstract class DynamicRegistry<R extends CodecProvider<? super R>> extend
 
         private DataGenPopulator<R> start() {
             BiMap<ResourceLocation, R> old = registry.registry;
-            registry.beginReload();
+            registry.beginReload(ReloadType.INTEGRATED_CLIENT);
             old.forEach(this::register);
             return this;
         }
@@ -655,11 +602,11 @@ public abstract class DynamicRegistry<R extends CodecProvider<? super R>> extend
         }
 
         private DataGenPopulator<R> end() {
-            registry.onReload();
+            registry.onReload(ReloadType.INTEGRATED_CLIENT);
             return this;
         }
 
-        public static <R extends CodecProvider<? super R>> void runScoped(DynamicRegistry<R> registry, Consumer<DataGenPopulator<R>> consumer) {
+        public static <R> void runScoped(DynamicRegistry<R> registry, Consumer<DataGenPopulator<R>> consumer) {
             var populator = new DataGenPopulator<>(registry).start();
             consumer.accept(populator);
             populator.end();

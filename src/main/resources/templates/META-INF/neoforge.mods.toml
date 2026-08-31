@@ -5,6 +5,11 @@
 # Find more information on toml format here:  https://github.com/toml-lang/toml
 
 # The license for you mod. This is mandatory metadata and allows for easier comprehension of your redistributive properties.
+# The loader that this mod uses. javafml is the NeoForge Java loader.
+modLoader="javafml"
+# The accepted FML/NeoForge loader version range.
+loaderVersion="${loader_version_range}"
+
 # Review your options at https://choosealicense.com/. All rights reserved is the default copyright stance, and is thus the default here.
 license="${mod_license}"
 

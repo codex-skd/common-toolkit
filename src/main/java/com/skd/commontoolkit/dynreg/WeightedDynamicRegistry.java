@@ -8,13 +8,14 @@ import java.util.function.Predicate;
 
 import javax.annotation.Nullable;
 
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
 
 import com.google.common.base.Preconditions;
 import com.google.common.base.Predicates;
 
-import com.skd.commontoolkit.codec.CodecProvider;
 import com.skd.commontoolkit.dynreg.WeightedDynamicRegistry.ILuckyWeighted;
+import com.skd.commontoolkit.dynreg.tag.DynamicHolderSet;
+import com.skd.commontoolkit.dynreg.tag.DynamicTagKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.random.WeightedEntry;
@@ -27,13 +28,13 @@ import net.minecraft.world.level.Level;
  *
  * @param <V>
  */
-public abstract class WeightedDynamicRegistry<V extends CodecProvider<? super V> & ILuckyWeighted> extends DynamicRegistry<V> {
+public abstract class WeightedDynamicRegistry<V extends ILuckyWeighted> extends DynamicRegistry<V> {
 
     protected List<Wrapper<V>> zeroLuckList = Collections.emptyList();
     protected int zeroLuckTotalWeight = 0;
 
-    public WeightedDynamicRegistry(Logger logger, String path, boolean synced, boolean subtypes) {
-        super(logger, path, synced, subtypes);
+    public WeightedDynamicRegistry(Logger logger, ResourceLocation id, RegistrySerializer<V> serializer) {
+        super(logger, id, serializer);
     }
 
     @Override
@@ -53,7 +54,7 @@ public abstract class WeightedDynamicRegistry<V extends CodecProvider<? super V>
     @Override
     protected void onReload(ReloadType type) {
         super.onReload(type);
-        this.zeroLuckList = this.registry.values().stream().map(item -> WeightedEntry.wrap(item, item.getWeight())).toList();
+        this.zeroLuckList = this.registry.values().stream().filter(item -> item.getWeight() > 0).map(item -> WeightedEntry.wrap(item, item.getWeight())).toList();
         this.zeroLuckTotalWeight = WeightedRandom.getTotalWeight(this.zeroLuckList);
     }
 
@@ -87,6 +88,27 @@ public abstract class WeightedDynamicRegistry<V extends CodecProvider<? super V>
         }
         stream.map(l -> l.<V>wrap(luck)).forEach(list::add);
         return WeightedRandom.getRandomItem(rand, list).map(Wrapper::data).orElse(null);
+    }
+
+    /**
+     * Gets a random item from the given tag, re-calculating the weights based on luck.
+     *
+     * @return A random item from the tag, or null if the tag is unbound or empty.
+     */
+    @Nullable
+    public V getRandomFromTag(DynamicTagKey<V> tag, RandomSource rand, float luck) {
+        return this.getTag(tag).map(set -> this.getRandomFromSet(set, rand, luck)).orElse(null);
+    }
+
+    /**
+     * Gets a random item from the given holder set, re-calculating the weights based on luck. Unbound or empty
+     * holders are skipped.
+     *
+     * @return A random item from the set, or null if the set has no bound entries with positive weight.
+     */
+    @Nullable
+    public V getRandomFromSet(DynamicHolderSet<V> set, RandomSource rand, float luck) {
+        return this.getRandomItem(rand, luck, set::contains);
     }
 
     /**

@@ -12,7 +12,6 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.DynamicOps;
 import com.mojang.serialization.JsonOps;
 
-import com.skd.commontoolkit.codec.CodecProvider;
 import com.skd.commontoolkit.datagen.DataGenBuilder;
 import com.skd.commontoolkit.datagen.DataGenBuilder.DataProviderFactory;
 import com.skd.commontoolkit.dynreg.DynamicRegistry;
@@ -29,7 +28,7 @@ import net.neoforged.neoforge.data.event.GatherDataEvent;
 /**
  * Data provider for objects registered to a {@link DynamicRegistry}.
  */
-public abstract class DynamicRegistryProvider<R extends CodecProvider<R>> implements DataProvider {
+public abstract class DynamicRegistryProvider<R> implements DataProvider {
 
     protected final CompletableFuture<HolderLookup.Provider> lookupProvider;
     protected final PackOutput.PathProvider pathProvider;
@@ -49,7 +48,7 @@ public abstract class DynamicRegistryProvider<R extends CodecProvider<R>> implem
      */
     public DynamicRegistryProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> registries, DynamicRegistry<R> registry) {
         this.lookupProvider = registries;
-        this.pathProvider = output.createPathProvider(PackOutput.Target.DATA_PACK, registry.getPath());
+        this.pathProvider = output.createPathProvider(PackOutput.Target.DATA_PACK, registry.getId().getNamespace() + "/" + registry.getId().getPath());
         this.registry = registry;
     }
 
@@ -59,7 +58,7 @@ public abstract class DynamicRegistryProvider<R extends CodecProvider<R>> implem
     @Deprecated(forRemoval = true)
     public DynamicRegistryProvider(GatherDataEvent event, DynamicRegistry<R> registry) {
         this.lookupProvider = event.getLookupProvider();
-        this.pathProvider = event.getGenerator().getPackOutput().createPathProvider(PackOutput.Target.DATA_PACK, registry.getPath());
+        this.pathProvider = event.getGenerator().getPackOutput().createPathProvider(PackOutput.Target.DATA_PACK, registry.getId().getNamespace() + "/" + registry.getId().getPath());
         this.registry = registry;
     }
 
@@ -112,7 +111,7 @@ public abstract class DynamicRegistryProvider<R extends CodecProvider<R>> implem
     /**
      * Generates all items provided by this provider.
      * <p>
-     * Use {@link #add(ResourceLocation, CodecProvider)} to supply items.
+     * Use {@link #add(ResourceLocation, Object)} to supply items.
      */
     public abstract void generate();
 
@@ -127,7 +126,7 @@ public abstract class DynamicRegistryProvider<R extends CodecProvider<R>> implem
      * @param factory A method reference to the provider's constructor.
      * @return A re-bound factory that will skip generation. This can be passed to {@link DataGenBuilder#provider(DataProviderFactory)}.
      */
-    public static <R extends CodecProvider<R>, T extends DynamicRegistryProvider<R>> DataProviderFactory<T> runSilently(DataProviderFactory<T> factory) {
+    public static <R, T extends DynamicRegistryProvider<R>> DataProviderFactory<T> runSilently(DataProviderFactory<T> factory) {
         return (output, registries, fileHelper) -> {
             T provider = factory.create(output, registries, fileHelper);
             provider.skipGeneration = true;
@@ -135,7 +134,7 @@ public abstract class DynamicRegistryProvider<R extends CodecProvider<R>> implem
         };
     }
 
-    public static <R extends CodecProvider<R>, T extends DynamicRegistryProvider<R>> DataProviderFactory<T> runSilently(BiFunction<PackOutput, CompletableFuture<HolderLookup.Provider>, T> factory) {
+    public static <R, T extends DynamicRegistryProvider<R>> DataProviderFactory<T> runSilently(BiFunction<PackOutput, CompletableFuture<HolderLookup.Provider>, T> factory) {
         return (output, registries, fileHelper) -> {
             T provider = factory.apply(output, registries);
             provider.skipGeneration = true;
@@ -143,7 +142,7 @@ public abstract class DynamicRegistryProvider<R extends CodecProvider<R>> implem
         };
     }
 
-    public static <R extends CodecProvider<R>, T extends DynamicRegistryProvider<R>> DataProviderFactory<T> runSilently(DataProvider.Factory<T> factory) {
+    public static <R, T extends DynamicRegistryProvider<R>> DataProviderFactory<T> runSilently(DataProvider.Factory<T> factory) {
         return (output, registries, fileHelper) -> {
             T provider = factory.create(output);
             provider.skipGeneration = true;

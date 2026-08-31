@@ -5,6 +5,7 @@
     "mixins": [
         "AnvilBlockMixin",
         "DataProviderMixin",
+        "DatagenModLoaderMixin",
         "HashCacheMixin",
         "ItemStackMixin"
     ],

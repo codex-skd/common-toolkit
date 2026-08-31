@@ -7,7 +7,6 @@ import java.util.function.Consumer;
 import java.util.function.IntConsumer;
 import java.util.function.IntSupplier;
 
-import com.skd.commontoolkit.cap.ModifiableEnergyStorage;
 import it.unimi.dsi.fastutil.booleans.BooleanConsumer;
 import net.minecraft.world.inventory.DataSlot;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -40,13 +39,6 @@ public class SimpleDataSlots {
         this.slots.forEach(consumer);
     }
 
-    /**
-     * Registers an energy storage for tracking.
-     */
-    public void addEnergy(ModifiableEnergyStorage energy) {
-        this.addSlot(new EnergyDataSlot(energy));
-    }
-
     public class LambdaDataSlot extends DataSlot {
 
         private final IntSupplier getter;
@@ -67,13 +59,6 @@ public class SimpleDataSlots {
             this.setter.accept(pValue);
         }
 
-    }
-
-    public class EnergyDataSlot extends LambdaDataSlot {
-
-        public EnergyDataSlot(ModifiableEnergyStorage energy) {
-            super(energy::getEnergyStored, energy::setEnergy);
-        }
     }
 
     /**

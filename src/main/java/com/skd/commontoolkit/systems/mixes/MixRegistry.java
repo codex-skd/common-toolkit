@@ -8,6 +8,7 @@ import org.jetbrains.annotations.Nullable;
 import com.skd.commontoolkit.CommonToolkit;
 import com.skd.commontoolkit.CommonToolkitClient;
 import com.skd.commontoolkit.dynreg.DynamicRegistry;
+import com.skd.commontoolkit.dynreg.RegistrySerializer;
 import com.skd.commontoolkit.systems.mixes.JsonMix.Type;
 import net.minecraft.world.item.alchemy.PotionBrewing;
 import net.neoforged.fml.loading.FMLEnvironment;
@@ -19,12 +20,7 @@ public class MixRegistry extends DynamicRegistry<JsonMix<?>> {
     public static final MixRegistry INSTANCE = new MixRegistry();
 
     public MixRegistry() {
-        super(CommonToolkit.LOGGER, "brewing_mixes", true, false);
-    }
-
-    @Override
-    protected void registerBuiltinCodecs() {
-        this.registerDefaultCodec(CommonToolkit.loc("mix"), JsonMix.CODEC);
+        super(CommonToolkit.LOGGER, CommonToolkit.loc("brewing_mixes"), RegistrySerializer.synced(JsonMix.CODEC));
     }
 
     @Override

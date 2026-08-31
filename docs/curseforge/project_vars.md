@@ -38,7 +38,7 @@ Autenticación Core: cabecera `x-api-key`
 | `neo_version` (loader) | `21.1.249` |
 | `framework` | `neoforge` |
 | `java_version` | `21` |
-| `mod_version` | `0.0.0-beta.1` |
+| `mod_version` | `0.0.0-beta.2` |
 | `environment` | `Client`, `Server` (requerido en ambos) |
 
 ## Rama
@@ -50,18 +50,18 @@ minecraft/1.21.1/neoforge-21.1.249/production
 ## Tag
 
 Formato: `<mc-version>-<framework>-<version>`
-Ejemplo (primera beta del port): `1.21.1-neoforge-0.0.0-beta.1`
+Ejemplo (primera beta del port): `1.21.1-neoforge-0.0.0-beta.1` (actual: `0.0.0-beta.2`)
 
 ## Parámetros del upload
 
 | Campo | Valor | Notas |
 |-------|-------|-------|
-| `displayName` | `Common Toolkit (0.0.0-beta.1)` | Nombre visible: `display_name (mod_version)` — lo compone el script |
+| `displayName` | `Common Toolkit (0.0.0-beta.2)` | Nombre visible: `display_name (mod_version)` — lo compone el script |
 | `changelog` | HTML (contenido literal de `docs/curseforge/versions/<version>.md`) | No resumir ni modificar |
 | `changelogType` | `html` | Obligatorio para que se vea bien |
 | `releaseType` | `beta` | Primera beta del port a 1.21.1. Releases estables usarán `release` |
 | `gameVersions` | `[9638, 9639, 11779, 10150]` | **IDs numéricos**, no nombres. Client + Server + 1.21.1 + NeoForge |
-| `JAR` | `common_toolkit-1.21.1-neoforge-21.1.249-0.0.0-beta.1.jar` | En `build/libs/` tras `./gradlew clean build` |
+| `JAR` | `common_toolkit-1.21.1-neoforge-21.1.249-0.0.0-beta.2.jar` | En `build/libs/` tras `./gradlew clean build` |
 
 ### IDs de `gameVersions` para 1.21.1
 

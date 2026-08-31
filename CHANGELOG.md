@@ -2,6 +2,12 @@
 
 Rama `minecraft/1.21.1/neoforge-21.1.249/production`. Historial independiente de la rama 26.2.
 
+## [0.0.0-beta.2] - 2026-08-31
+
+### Fixed
+
+- **Crash en carga inicial** (`DatagenModLoaderMixin`): el `@Inject` apuntaba a `DatagenModLoader.begin` con una firma obsoleta de Forge (5 booleans + `Runnable` / `DataGenerator` / `Consumer`), incompatible con NeoForge 21.1.249 que usa `(Set, Path, Collection, Collection, Set, 6x boolean, String, File)`. Corregida la firma del mixin para coincidir con `net.neoforged.neoforge.data.loading.DatagenModLoader` real; elimina el `MixinApplyError: Invalid descriptor` que cerraba el juego al iniciar.
+
 ## [0.0.0-beta.1] - 2026-08-31
 
 ### Added

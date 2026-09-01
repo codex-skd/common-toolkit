@@ -2,6 +2,17 @@
 
 Rama `minecraft/1.21.1/neoforge-21.1.249/production`. Historial independiente de la rama 26.2.
 
+## [0.0.0-beta.3] - 2026-09-01
+
+### Added
+
+- **`GearSetRegistry.getRandomSet(RandomSource, float, List<GearSet.SetPredicate>)`** — sobrecarga que
+  refleja la API de Placebo upstream, donde los datos de bosses/invasores guardan los gear sets como
+  `List<SetPredicate>` (entradas tipo `"#mi_mod:mi_tag"` o un id de set). Los predicados se combinan con
+  OR lógico. Sin esto, portar `BasicBossData` de Apotheosis 1.21 obligaba a reescribir su codec a
+  `DynamicHolderSet`, rompiendo el parseo de los ficheros `apothic_invaders` / `apothic_elites` que usan
+  refs de tag con prefijo `#`.
+
 ## [0.0.0-beta.2] - 2026-08-31
 
 ### Fixed

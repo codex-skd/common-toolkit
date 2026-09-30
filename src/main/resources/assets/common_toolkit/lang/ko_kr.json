@@ -1,0 +1,5 @@
+{
+  "common_toolkit.cmd.serialize_success": "%s을(를) %s에 저장했습니다.",
+  "common_toolkit.cmd.serialize_failure": "직렬화 프로세스 중에 오류가 발생했습니다.",
+  "common_toolkit.cmd.not_found": "%s을(를) 찾을 수 없습니다."
+}

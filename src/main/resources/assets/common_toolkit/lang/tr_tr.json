@@ -1,0 +1,5 @@
+{
+  "common_toolkit.cmd.serialize_success": "%s eşyası %s konumuna kaydedildi.",
+  "common_toolkit.cmd.serialize_failure": "Dizileştirme işlemi sırasında bir hata oluştu.",
+  "common_toolkit.cmd.not_found": "%s bulunamadı."
+}

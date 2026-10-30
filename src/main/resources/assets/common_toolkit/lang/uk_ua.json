@@ -1,0 +1,5 @@
+{
+  "common_toolkit.cmd.serialize_success": "Збережено %s у %s.",
+  "common_toolkit.cmd.serialize_failure": "Сталася помилка у процесі серіалізації.",
+  "common_toolkit.cmd.not_found": "%s не було знайдено."
+}

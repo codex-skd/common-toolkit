@@ -1,0 +1,5 @@
+{
+  "common_toolkit.cmd.serialize_success": "%s wurde in %s gespeichert.",
+  "common_toolkit.cmd.serialize_failure": "Beim Serialisierungsvorgang ist ein Fehler aufgetreten.",
+  "common_toolkit.cmd.not_found": "%s wurde nicht gefunden."
+}
